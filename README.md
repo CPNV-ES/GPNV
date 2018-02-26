@@ -1,14 +1,14 @@
 # GPNV
 
 ## Requirements
-- Laravel 5.3
+- Laravel 5.5
 - Composer
-- PHP >= 5.6.4
+- PHP >= 7.0.0
 
 ## Installation
 > Note: This procedure explain only how to set up the site, not how to configure
 > Laravel or create a server. If you want, you can use vagrant/homestead here is the link
-> with the instructions: https://laravel.com/docs/5.4/homestead#installation-and-setup
+> with the instructions: https://laravel.com/docs/5.5/homestead#installation-and-setup
 > Also note that the main web site is the "public" folder of the project not the root
 
 Once this project is copy in your server, go to the project root and
