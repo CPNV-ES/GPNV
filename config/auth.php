@@ -36,13 +36,19 @@ return [
     */
 
     'guards' => [
+
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        /*
         'web' => [
           'driver' => 'header_token',
           'provider' => 'users',
           'input_key' => 'X-Forwarded-User',
           'storage_key' => 'friendlyid'
         ],
-
+        */
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
