@@ -39,7 +39,7 @@ class SAMLController extends Controller
 
 	public function error(Request $request)
     {
-	   echo "SAML Error";
+        return view('auth.error');
     }
 
 }

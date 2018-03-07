@@ -36,7 +36,7 @@ return $settings = array(
     /**
      * Where to redirect after login if no other option was provided
      */
-    'errorRoute' => '/',
+    'errorRoute' => '/saml2/error',
     /*****
      * One Login Settings
      */
