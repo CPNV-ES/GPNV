@@ -32,11 +32,11 @@ return $settings = array(
     /**
      * Where to redirect after login if no other option was provided
      */
-    'loginRoute' => '/loggedin',
+    'loginRoute' => '/',
     /**
      * Where to redirect after login if no other option was provided
      */
-    'errorRoute' => '/error',
+    'errorRoute' => '/',
     /*****
      * One Login Settings
      */
@@ -64,14 +64,15 @@ return $settings = array(
         'privateKey' => env('SAML2_SP_PRIVATEKEY',''),
         // Identifier (URI) of the SP entity.
         // Leave blank to use the 'saml_metadata' route.
-        'entityId' => env('SAML2_SP_ENTITYID',''),
+        'entityId' => env('HOST').'/saml2/metadata',
         // Specifies info about where and how the <AuthnResponse> message MUST be
         // returned to the requester, in this case our SP.
         'assertionConsumerService' => array(
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-POST binding.
             // Leave blank to use the 'saml_acs' route
-            'url' => '',
+            // http://sc-c332-pc06.cpnv.ch/saml2/login/acs
+            'url' => env('HOST').'/saml2/acs',
         ),
         // Specifies info about where and how the <Logout Response> message MUST be
         // returned to the requester, in this case our SP.
@@ -80,7 +81,7 @@ return $settings = array(
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-Redirect binding.
             // Leave blank to use the 'saml_sls' route
-            'url' => '',
+            'url' => env('HOST').'/saml2/sls',
         ),
     ),
     // Identity Provider Data that we want connect with our SP
