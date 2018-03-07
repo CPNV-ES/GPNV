@@ -72,7 +72,7 @@ return $settings = array(
             // using HTTP-POST binding.
             // Leave blank to use the 'saml_acs' route
             // http://sc-c332-pc06.cpnv.ch/saml2/login/acs
-            'url' => env('HOST').'/saml2/acs',
+            'url' => url('/').'/saml2/acs',
         ),
         // Specifies info about where and how the <Logout Response> message MUST be
         // returned to the requester, in this case our SP.
@@ -81,7 +81,7 @@ return $settings = array(
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-Redirect binding.
             // Leave blank to use the 'saml_sls' route
-            'url' => env('HOST').'/saml2/sls',
+            'url' => url('/').'/saml2/sls',
         ),
     ),
     // Identity Provider Data that we want connect with our SP
