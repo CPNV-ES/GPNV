@@ -13,6 +13,7 @@
 
 Once this project is copy in your server, go to the project root and
 use the following command :`cp .env.example .env`.
+In `.env`, you need to have a key HOST , with the current host
 Don't forget to create the database and grant access to the user.
 
 Create the database by default the name is `GPNV`
