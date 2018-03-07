@@ -3,6 +3,10 @@ require "capistrano/setup"
 
 # Include default deployment tasks
 require "capistrano/deploy"
+require "capistrano/scm/git"
+require 'capistrano/laravel'
+
+install_plugin Capistrano::SCM::Git
 
 # Load the SCM plugin appropriate to your project:
 #
