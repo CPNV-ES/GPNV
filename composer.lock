@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d42377e839b96e65a433de37cff15d3e",
+    "content-hash": "3b1ead252a196011946f5211bc5da47f",
     "packages": [
+        {
+            "name": "aacotroneo/laravel-saml2",
+            "version": "dev-remove_mcrypt",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aacotroneo/laravel-saml2.git",
+                "reference": "28d3b08e94e1aa092aa052c7ff124755845c7c5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aacotroneo/laravel-saml2/zipball/28d3b08e94e1aa092aa052c7ff124755845c7c5b",
+                "reference": "28d3b08e94e1aa092aa052c7ff124755845c7c5b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "illuminate/support": ">=5.0.0",
+                "onelogin/php-saml": "3.0.0.x-dev",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Aacotroneo\\Saml2\\Saml2ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Saml2": "Aacotroneo\\Saml2\\Facades\\Saml2Auth"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Aacotroneo\\Saml2\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "aacotroneo",
+                    "email": "aacotroneo@gmail.com"
+                }
+            ],
+            "description": "A Laravel package for Saml2 integration as a SP (service provider) based on OneLogin toolkit, which is much lightweight than simplesamlphp",
+            "homepage": "https://github.com/aacotroneo/laravel-saml2",
+            "keywords": [
+                "SAML2",
+                "laravel",
+                "onelogin",
+                "saml"
+            ],
+            "time": "2018-02-28T14:45:52+00:00"
+        },
         {
             "name": "doctrine/inflector",
             "version": "v1.3.0",
@@ -800,6 +859,56 @@
             "time": "2017-01-16T07:55:07+00:00"
         },
         {
+            "name": "onelogin/php-saml",
+            "version": "3.0.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/onelogin/php-saml.git",
+                "reference": "7cf3bb3a2cd6dec7751fdb4c69fd0e5e23479af9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/7cf3bb3a2cd6dec7751fdb4c69fd0e5e23479af9",
+                "reference": "7cf3bb3a2cd6dec7751fdb4c69fd0e5e23479af9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "robrichards/xmlseclibs": ">=3.0"
+            },
+            "require-dev": {
+                "pdepend/pdepend": ">=2.5.0",
+                "phploc/phploc": "*",
+                "phpunit/phpunit": ">=4.8",
+                "satooshi/php-coveralls": ">=1.0.2",
+                "sebastian/phpcpd": "*",
+                "squizlabs/php_codesniffer": "~3.1.1"
+            },
+            "suggest": {
+                "ext-curl": "Install curl lib to be able to use the IdPMetadataParser for parsing remote XMLs",
+                "ext-gettext": "Install gettext and php5-gettext libs to handle translations",
+                "ext-openssl": "Install openssl lib in order to handle with x509 certs (require to support sign and encryption)"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/Saml2"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "OneLogin PHP SAML Toolkit",
+            "homepage": "https://developers.onelogin.com/saml/php",
+            "keywords": [
+                "SAML2",
+                "onelogin",
+                "saml"
+            ],
+            "time": "2018-03-07T14:03:46+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.11",
             "source": {
@@ -1070,6 +1179,46 @@
                 "uuid"
             ],
             "time": "2018-01-20T00:28:24+00:00"
+        },
+        {
+            "name": "robrichards/xmlseclibs",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robrichards/xmlseclibs.git",
+                "reference": "d937712f70f93a584eb0299ccd87dc6374003781"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/d937712f70f93a584eb0299ccd87dc6374003781",
+                "reference": "d937712f70f93a584eb0299ccd87dc6374003781",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.4"
+            },
+            "suggest": {
+                "ext-openssl": "OpenSSL extension"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RobRichards\\XMLSecLibs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A PHP library for XML Security",
+            "homepage": "https://github.com/robrichards/xmlseclibs",
+            "keywords": [
+                "security",
+                "signature",
+                "xml",
+                "xmldsig"
+            ],
+            "time": "2017-08-31T09:27:07+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3778,12 +3927,13 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "mortimer/rootrelativeurls": 20,
-        "mortimer/header-token-guard": 20
+        "mortimer/header-token-guard": 20,
+        "aacotroneo/laravel-saml2": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.0.0"
