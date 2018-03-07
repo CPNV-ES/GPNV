@@ -64,7 +64,7 @@ return $settings = array(
         'privateKey' => env('SAML2_SP_PRIVATEKEY',''),
         // Identifier (URI) of the SP entity.
         // Leave blank to use the 'saml_metadata' route.
-        'entityId' => env('HOST').'/saml2/metadata',
+        'entityId' => url('/').'/saml2/metadata',
         // Specifies info about where and how the <AuthnResponse> message MUST be
         // returned to the requester, in this case our SP.
         'assertionConsumerService' => array(
