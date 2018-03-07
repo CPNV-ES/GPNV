@@ -16,11 +16,27 @@ server "gpnv.mycpnv.ch", user: "thegpnv", roles: %w{app db web},   ssh_options: 
 
 
 after  'composer:run', "copy_dotenv"
+after  'composer:run', "get_version"
 
 #Copy .env in the current release
 task :copy_dotenv do
 	on roles(:all) do
 		execute :cp, "#{shared_path}/.env #{release_path}/.env" 
+	end
+end
+
+# Get the last git version
+task :get_version do
+	gitVersion = "Not defined"
+		
+	if(system('git describe --abbrev=0 --tags')) 
+		system("require 'open3'")
+		stdin, stdout, stderr = Open3.popen3('git describe --abbrev=0 --tags')
+		gitVersion = stdout.readlines.to_s[2..-5]
+	end
+
+	on roles(:all) do
+		execute  :echo, "#{gitVersion} > ~/gpnv.mycpnv.ch/current/public/version.tag"
 	end
 end
 
