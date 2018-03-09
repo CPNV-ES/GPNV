@@ -69,7 +69,7 @@
         <ul class="nav navbar-nav navbar-right">
             <!-- Authentication Links -->
             @if (Auth::guest())
-                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><a href="{{ route('saml_login') }}">Login</a></li>
             @else
                 <li><a href="{{route('user.show', Auth::user()->id)}}">{{Auth::user()->fullname}}</a></li>
             @endif

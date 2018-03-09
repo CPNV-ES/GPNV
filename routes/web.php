@@ -21,6 +21,7 @@ Route::group(['middleware' => 'web'], function () {
     //Route::get('login', view('auth.nologin'));
 
     //Route::get('test', 'Welcome@Test');
+    Route::get('saml2/error',['as' => 'saml_error','uses' => 'SAMLController@error']);
     Route::get('login',['as' => 'login','uses' => 'SessionController@nologin']);
 
     Route::group(['middleware' => 'auth'], function(){

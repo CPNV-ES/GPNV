@@ -13,6 +13,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'Aacotroneo\Saml2\Events\Saml2LoginEvent' => [
+            'App\Listeners\LoginListener',
+        ],
+        'Aacotroneo\Saml2\Events\Saml2LogoutEvent' => [
+            'App\Listeners\LogoutListener',
+        ],
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],

@@ -12,7 +12,8 @@
         "illuminate/view": "5.5.*",
         "laravelcollective/html": "5.5",
         "mortimer/rootrelativeurls": "dev-master",
-        "mortimer/header-token-guard": "dev-master"
+        "mortimer/header-token-guard": "dev-master",
+        "aacotroneo/laravel-saml2": "dev-remove_mcrypt"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -75,5 +76,7 @@
             "url": "https://github.com/phurni/mortimer-header-token-guard.git",
             "type": "git"
         }
-    ]
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
