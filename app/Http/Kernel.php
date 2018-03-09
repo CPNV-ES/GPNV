@@ -51,5 +51,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'Ip' => \App\Http\Middleware\Ip::class,
         'ProjectControl' => \App\Http\Middleware\ProjectControl::class,
+        'samlauth' => \App\Http\Middleware\SamlAuth::class,
     ];
 }
