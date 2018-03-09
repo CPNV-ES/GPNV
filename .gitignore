@@ -12,4 +12,7 @@ public/files/
 public/avatar/*
 !public/avatar/default.png
 .remote-sync.json
-bootstrap/cache/*
+/bootstrap/cache/*
+/config/gpnv_rsa
+/config/gpnv_rsa.pub
+/log/*
