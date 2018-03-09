@@ -15,7 +15,7 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-php_value post_max_size 20M
-php_value upload_max_filesize 20M
-php_value extension php_fileinfo.dll
-php_value extension fileinfo.so
+# php_value post_max_size 20M
+# php_value upload_max_filesize 20M
+# php_value extension php_fileinfo.dll
+# php_value extension fileinfo.so
