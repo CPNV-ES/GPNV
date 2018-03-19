@@ -79,7 +79,7 @@ class CheckList extends Model
 
   //return completed items
   public function showCompleted(){
-    $tmp="";
+    $tmp=[];
     foreach ($this->items as $item) {
       if($item->done)
       {
@@ -91,7 +91,7 @@ class CheckList extends Model
 
   //return items toDo
   public function showToDo(){
-    $tmp="";
+    $tmp=[];
     foreach ($this->items as $item) {
       if(!$item->done)
       {
