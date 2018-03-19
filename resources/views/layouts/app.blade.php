@@ -90,7 +90,6 @@
 <script src="{{ URL::asset('js/bootbox.min.js') }}"></script>
 <script src="{{ URL::asset('js/bootstrap.3.3.7.min.js' )}}"></script>
 <script src="{{ URL::asset('js/scripts.js') }}"></script>
-<script src="{{ URL::asset('js/scripts.js') }}"></script>
 <script src="{{ URL::asset('js/checkList.js') }}"></script>
 <script src="{{ URL::asset('js/tasks.js') }}"></script>
 <script src="{{ URL::asset('js/scenario.js') }}"></script>
