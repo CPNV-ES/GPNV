@@ -32,21 +32,11 @@ for generating the database structure and adding the test data.
 
 >If you are on Linux os make sure that laravel has the necessary rights on the website directory
 
-## Configuration Notes
-These are the default logins information, you don't need that if you haven't
-use the command : `php artisan db:seed` during the installation.
+For SAML authentication work, your machine name (sc-c3XX-pcXX.cpnv.ch) must be referenced in the SAML server of the intranet.
 
-|        Login          | friendlyId |  role   |
-| --------------------- | ---------- | ------- |
-| utilisateur@mail.com  |      1     | student |
-| tournesol@mail.com    |      2     | teacher |
-| anno@nimme.com        |      3     | student |
+On your side, if you use Homestead, you must redirect port 80 to port 80 (in the homestead.yaml file) and in the.env file, you must change the parameter as such: HOST_URL=http://sc-c3XX-pcXX.cpnv.ch
 
-## Use app in "Test Mode"
-In order to use the site, an add-on able to modify HTTP Header is needed.
-Here is some add-ons for the most used browsers :
- - Mozilla Firefox : https://addons.mozilla.org/fr/firefox/addon/modify-headers/?src=search
- - Google Chrome : https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi
+After that, you can login in GPNV with your intranet account.
 
 ## Deployment
 > Note: make sure you have the credentials to access the different services
@@ -59,7 +49,7 @@ to make sure that all the dependencies are installed.
 Once it's done, that the '.htaccess' file in root and 'public' folder have to
 be edited. The lines which start with 'php_value' must be remove.
 
-Also make sure that the .env file has the right database credentials (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD )
+Also make sure that the .env file has the right database credentials (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, HOST_URL)
 
 When all those things are done, the website can be upload on the server by ftp.
 
