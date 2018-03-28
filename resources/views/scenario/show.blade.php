@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="row">
-    <form method="POST" action="{{route('scenario.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id))}}" class="col-xs-12 col-md-6 ">
+    <form method="POST" action="{{route('scenario.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id))}}" class="col-xs-12 col-md-12 ">
       {{ csrf_field() }}
       {{ method_field('PUT') }}
       <div class="form-group">
@@ -29,7 +29,7 @@
     </form>
   </div>
   <div class="row">
-    <div class="elements col-xs-12 col-md-5">
+    <div class="elements col-xs-12 col-md-6">
       <h2>Etapes</h2>
       <div class="table">
         <div class="tableRow">
@@ -70,7 +70,7 @@
         </form>
       </div>
     </div>
-    <div class="maquette col-xs-12 col-md-4">
+    <div class="maquette col-xs-12 col-md-6">
       <h2>Image</h2>
       <div ondrop="drop(event)" ondragover="allowDrop(event)">
         <a href="{{ URL::asset('mockups/thumbnail-default.jpg') }}" target="_blank">
@@ -78,11 +78,11 @@
         </a>
       </div>
     </div>
-    <div class="col-xs-12 col-md-3">
+    <div class="col-xs-12 col-md-12">
       <h2>Images disponibles</h2>
       <div class="col-xs-12 maquettes">
         @foreach($mockups as $mockup)
-        <div style="text-align:center; margin-bottom:2px;">
+        <div style="padding:2px;">
           <img src="{{ URL::asset('mockups/'.$projectId.'/'.$mockup->url)}}" id='{{$mockup->id}}' style="max-width:100%; max-height: 200px;" draggable="true" ondragstart="drag(event)">
         </div>
         @endforeach
