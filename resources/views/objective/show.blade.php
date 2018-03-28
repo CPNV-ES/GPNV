@@ -28,7 +28,8 @@
         </div>
       </div>
       @if(Auth::user()->projects()->find($project->id))
-        <a class="btn btn-primary addCheckList" data-id="{{$objectifs->getId()}}" data-projectid="{{$project->id}}" data-URL="{{ URL('project') }}">Ajouter</a>
+        @include('objective.create')
+        <a class="btn btn-primary newObjective">Ajouter</a>
       @endif
       <button class="btn btn-primary reloadobjectives pull-right" data-projectid="{{$project->id}}">
         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
