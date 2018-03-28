@@ -6,7 +6,7 @@
     <div class="row">
       @include('project.infos')
 
-      @include('project.objective', ['objectifs' => $objectifs])
+      @include('objective.show', ['objectifs' => $objectifs])
 
       @include('project.membership')
 
