@@ -32,11 +32,15 @@ for generating the database structure and adding the test data.
 
 >If you are on Linux os make sure that laravel has the necessary rights on the website directory
 
+### Server login
 For SAML authentication work, your machine name (sc-c3XX-pcXX.cpnv.ch) must be referenced in the SAML server of the intranet.
 
 On your side, if you use Homestead, you must redirect port 80 to port 80 (in the homestead.yaml file) and in the.env file, you must change the parameter as such: HOST_URL=http://sc-c3XX-pcXX.cpnv.ch
 
 After that, you can login in GPNV with your intranet account.
+
+### Local login
+If you want to use GPNV without SAML, in.env, you must define `UTILISATION=LOCAL`. The application will automatically log in with the first account in the database.
 
 ## Deployment
 > Note: make sure you have the credentials to access the different services
