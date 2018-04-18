@@ -127,6 +127,11 @@ class SessionController extends Controller
     }
 
     public function noLogin(){
-      return view('auth.nologin');
+        if(env("UTILISATION", "SERVER") == "LOCAL") {
+            $user = User::first();
+            \Auth::login($user);
+            return redirect()->route('home');
+        }
+        return view('auth.nologin');
     }
 }
