@@ -127,7 +127,7 @@ class SessionController extends Controller
     }
 
     public function noLogin(){
-        if(env("UTILISATION", "SERVER") == "LOCAL") {
+        if(env("USAGE", "SERVER") == "LOCAL") {
             $user = User::first();
             \Auth::login($user);
             return redirect()->route('home');
