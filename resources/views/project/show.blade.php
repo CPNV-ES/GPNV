@@ -94,13 +94,14 @@
 
       @include('project.logbook')
 
-      @include('project.delivery')
+      @include('delivery.show')
 
       @include('project.file')
     </div>
 </div>
 @push('scripts')
     <script src="{{ URL::asset('js/objectifs.js') }}"></script>
+    <script src="{{ URL::asset('js/delivery.js') }}"></script>
     <script src="{{ URL::asset('js/checkList.js') }}"></script>
     <script src="{{ URL::asset('js/tasks.js') }}"></script>
     <script src="{{ URL::asset('js/scenario.js') }}"></script>
