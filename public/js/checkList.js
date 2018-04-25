@@ -5,24 +5,28 @@
 */
 $(document).ready(function () {
   /**
-   * Add a new item on checkList
-   *
-   * @return form to insert a new checklist
+   * Add a new checkList
    */
-  $('.addCheckList').click(function () {
-      var id = this.getAttribute('data-id');
-      var productId = this.getAttribute('data-projectid');
-      var baseUrl = this.getAttribute('data-URL');
+  $(".newCheckList").click(function(e) {
+      e.preventDefault()
+      var a = $(this).parent('form'), url = a.attr('action'), title = a.children('#name').val()  //$('#name').val())
 
-      $.get(baseUrl+"/"+productId+"/checklist/"+id+"/create", {}, function (form) {
-          bootbox.dialog({
-              title: "Insérer un nouvel élément",
-              message: form
-          });
+      $.ajax({
+          url: url,
+          type: 'POST',
+          data: {name: title},
+          success: function (data) {
+              var result = $('<div />').append(data).find('.deliveriesData').html();
+              $(".deliveriesData").html(result);
+              var result = $('<div />').append(data).find('.objectivesData').html();
+              $(".objectivesData").html(result);
+              bootbox.hideAll();
+          }
       });
   });
 
   /**
+   *
    * switch view button hidde or not the completed items
    */
   $('.changeView').click(function(){

@@ -6,7 +6,7 @@
     <div class="row">
       @include('project.infos')
 
-      @include('project.objective', ['objectifs' => $objectifs])
+      @include('objective.show', ['objectifs' => $objectifs])
 
       @include('project.membership')
 
@@ -94,9 +94,16 @@
 
       @include('project.logbook')
 
-      @include('project.delivery')
+      @include('delivery.show')
 
       @include('project.file')
     </div>
 </div>
+@push('scripts')
+    <script src="{{ URL::asset('js/objectifs.js') }}"></script>
+    <script src="{{ URL::asset('js/checkList.js') }}"></script>
+    <script src="{{ URL::asset('js/tasks.js') }}"></script>
+    <script src="{{ URL::asset('js/scenario.js') }}"></script>
+    <script src="{{ URL::asset('js/app.js') }}"></script>
+@endpush
 @endsection

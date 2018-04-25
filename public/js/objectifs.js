@@ -29,3 +29,13 @@ $(document).on("click", '.showObjectif', function(event) {
         });
     });
   });
+
+$(document).ready(function () {
+    $('.newObjective').click(function () {
+        $('.formNewObjective').removeClass("hidden")
+    });
+
+    $('.cancelNewObjective').click(function () {
+        $('.formNewObjective').addClass("hidden")
+    });
+})

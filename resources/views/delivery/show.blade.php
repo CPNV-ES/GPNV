@@ -34,7 +34,8 @@ Description: Show the checkList "Livrables"
 
 
         @if(Auth::user()->projects()->find($project->id))
-            <a class="btn btn-primary addCheckList" data-id="{{$livrables->getId()}}" data-projectid="{{$project->id}}" data-URL="{{ URL('project') }}">Ajouter</a>
+            @include('delivery.create')
+            <a class="btn btn-primary newDelivery">Ajouter</a>
         @endif
         @if($livrables->getNbItemsDone())
             <a class="btn btn-primary changeView">Voir les éléments effectués</a>
@@ -46,3 +47,6 @@ Description: Show the checkList "Livrables"
     </div>
   </div>
 </div>
+@push('scripts')
+    <script src="{{ URL::asset('js/delivery.js') }}"></script>
+@endpush
