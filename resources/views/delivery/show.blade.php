@@ -47,3 +47,6 @@ Description: Show the checkList "Livrables"
     </div>
   </div>
 </div>
+@push('scripts')
+    <script src="{{ URL::asset('js/delivery.js') }}"></script>
+@endpush
