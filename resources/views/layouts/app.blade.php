@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{{ URL::asset('css/fonts.google.lato.css') }}"/>
 
     <!-- Styles -->
+    @yield('css')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.3.3.7.min.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/template.css') }}"/>
-    <link rel="stylesheet" href="{{ URL::asset('css/project.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/logBook.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/awesome-bootstrap-checkbox.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/tasks.css') }}"/>
