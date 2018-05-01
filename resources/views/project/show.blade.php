@@ -6,8 +6,6 @@
     <div class="row">
       @include('project.infos')
 
-      @include('objective.show', ['objectifs' => $objectifs])
-
       @include('project.membership')
 
       <div class="col-xs-12 col-lg-6">
