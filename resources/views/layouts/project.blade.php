@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="projectContainer">
 
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
@@ -15,7 +15,7 @@
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-home"></i><br>Acceuil</h3>
                     </a>
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.showObjectives') ? 'active' : '' }}">
+                    <a href="{{route('objective.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'objective.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-crosshairs"></i><br>Objectifs</h3>
                     </a>
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == '') ? 'active' : '' }}">
@@ -35,9 +35,9 @@
                     </a>
                 </div>
             </div>
-            <div class="col-sm-9 col-md-10 content">
+            <div class="col-sm-9 col-md-10 projectContent">
 
-                @yield('content')
+                @yield('projectContent')
 
             </div>
         </div>
@@ -47,9 +47,9 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ URL::asset('css/project.css') }}"/>
-    @yield('css')
+    @yield('projectCss')
 @endsection
 
 @push('scripts')
-    @stack('scripts')
+    @stack('projectScripts')
 @endpush
