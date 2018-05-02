@@ -5,7 +5,7 @@
     <div class="projectContainer">
 
         <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
+            <div class="sidebar col-sm-3 col-md-2">
                 <div class="mini-submenu">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -24,7 +24,7 @@
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == '') ? 'active' : '' }}">
                         <h3><i class="fa fa-book"></i><br>Journal de bord</h3>
                     </a>
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'files.show') ? 'active' : '' }}">
+                    <a href="{{route('files.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'files.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-copy"></i><br>Fichiers</h3>
                     </a>
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.showDeliveries') ? 'active' : '' }}">
@@ -35,7 +35,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-sm-9 col-md-10 projectContent">
+            <div class="projectContent col-sm-9 col-md-10">
 
                 @yield('projectContent')
 
