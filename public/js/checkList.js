@@ -9,7 +9,7 @@ $(document).ready(function () {
    */
   $(".newCheckList").click(function(e) {
       e.preventDefault()
-      var a = $(this).parent('form'), url = a.attr('action'), title = a.children('#name').val()  //$('#name').val())
+      var div = $(this).parent('div'), form = div.parent('form'), url = form.attr('action'), title = form.children('div').children('#name').val()  //$('#name').val())
 
       $.ajax({
           url: url,
