@@ -98,8 +98,6 @@
     </div>
 </div>
 @push('scripts')
-    <script src="{{ URL::asset('js/objectifs.js') }}"></script>
-    <script src="{{ URL::asset('js/checkList.js') }}"></script>
     <script src="{{ URL::asset('js/tasks.js') }}"></script>
     <script src="{{ URL::asset('js/scenario.js') }}"></script>
     <script src="{{ URL::asset('js/app.js') }}"></script>
