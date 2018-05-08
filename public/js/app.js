@@ -692,31 +692,7 @@ $(document).ready(function () {
         });
     });
 
-    // Delete objective of project
-    $(document).on("click", 'a.removeObjective', function(event) {
-        var id = this.getAttribute('data-id');
-        var projectid = this.getAttribute('data-projectid');
 
-        bootbox.confirm("Voulez vous vraiment supprimer cet objectif ? ", function (result) {
-            if (result) {
-                $.ajax({
-                    type: "DELETE",
-                    url: projectid + "/objective/" + id,
-                    success: function (data) {
-                        bootbox.alert("Objectif supprimé avec succès");
-                        $.ajax({
-                            url: "{{ route('project.showObjectives', '@') }}".replace('@', projectid),
-                            type: 'get',
-                            success: function (data) {
-                                var result = $('<div />').append(data).find('.objectivesData').html();
-                                $(".objectivesData").html(result)
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    });
 
     // Delete delivery of project
     $(document).on("click", 'a.removeDelivery', function(event) {

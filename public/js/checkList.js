@@ -25,6 +25,31 @@ $(document).ready(function () {
       });
   });
 
+    $(document).on("click", 'a.removeObjective', function(event) {
+      var id = this.getAttribute('data-id');
+      var projectid = this.getAttribute('data-projectid');
+
+      bootbox.confirm("Voulez vous vraiment supprimer cet objectif ?", function (result) {
+          if (result) {
+              $.ajax({
+                  type: "DELETE",
+                  url: "/project/" + projectid + "/objective/" + id,
+                  success: function (data) {
+                      bootbox.alert("Objectif supprimé avec succès");
+                      $.ajax({
+                          url: "",
+                          type: 'get',
+                          success: function (data) {
+                              var result = $('<div />').append(data).find('.objectivesData').html();
+                              $(".objectivesData").html(result)
+                          }
+                      });
+                  }
+              });
+          }
+      });
+  })
+
   /**
    *
    * switch view button hidde or not the completed items

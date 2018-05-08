@@ -141,7 +141,7 @@ Route::group(['middleware' => 'web'], function () {
 
         /* DELETE ROUTE*/
         Route::delete('project/{id}/delivery/{deliveryId}', ['as' => 'project.deleteDelivery', 'uses' => 'ProjectController@deleteDelivery']);
-        Route::delete('project/{id}/objective/{objectiveId}', ['as' => 'project.deleteObjective', 'uses' => 'ProjectController@deleteObjective']);
+        Route::delete('project/{id}/objective/{objectiveId}', ['as' => 'objective.delete', 'uses' => 'ObjectiveController@delete']);
 
         Route::post('tasktype', ['as' => 'taskType.store', 'uses' => 'TaskTypesController@store']);
     });
