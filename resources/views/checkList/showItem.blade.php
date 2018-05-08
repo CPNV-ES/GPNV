@@ -1,5 +1,5 @@
 <div class="objectif">
-  <form method="post" action="{{$projectId}}/id/{{$item->id}}">
+  <form method="post" action="id/{{$item->id}}">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <div class="form-group">
