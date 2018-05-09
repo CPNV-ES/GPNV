@@ -30,8 +30,8 @@
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.showDeliveries') ? 'active' : '' }}">
                         <h3><i class="fa fa-list-ol"></i><br>Livrables</h3>
                     </a>
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == '') ? 'active' : '' }}">
-                        <h3><i class="fa fa-users"></i><br>Utilisateurs</h3>
+                    <a href="{{route('memberships.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'memberships.show') ? 'active' : '' }}">
+                        <h3><i class="fa fa-users"></i><br>Membres</h3>
                     </a>
                 </div>
             </div>
