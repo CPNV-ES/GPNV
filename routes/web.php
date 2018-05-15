@@ -39,7 +39,7 @@ Route::group(['middleware' => 'web'], function () {
             ]
         );
 
-        Route::delete('delivery/unlink/{checkList_id}/', ['as' => 'delivery.unlink', 'uses' => 'CheckListController@unlink']);
+        Route::delete('deliverable/unlink/{checkList_id}/', ['as' => 'deliverable.unlink', 'uses' => 'CheckListController@unlink']);
 
         Route::get('tasks/{task}/',['as' => 'tasks.show','uses' => 'TaskController@show'])->where('task', '[0-9]+');
         Route::get('tasks/{task}/children/create', ['as' => 'tasks.createChildren','uses' => 'TaskController@createChildren'])->where('task', '[0-9]+');
@@ -140,7 +140,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('project/{id}/objectives', ['as' => 'objective.show', 'uses' => 'ObjectiveController@show']);
 
         /* DELETE ROUTE*/
-        Route::delete('project/{id}/delivery/{deliveryId}', ['as' => 'project.deleteDelivery', 'uses' => 'ProjectController@deleteDelivery']);
+        Route::delete('project/{id}/deliverable/{deliveryId}', ['as' => 'project.deleteDelivery', 'uses' => 'ProjectController@deleteDelivery']);
         Route::delete('project/{id}/objective/{objectiveId}', ['as' => 'objective.delete', 'uses' => 'ObjectiveController@delete']);
 
         Route::post('tasktype', ['as' => 'taskType.store', 'uses' => 'TaskTypesController@store']);

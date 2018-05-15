@@ -34,7 +34,7 @@ Description: Show the checkList "Livrables"
 
 
         @if(Auth::user()->projects()->find($project->id))
-            @include('delivery.create')
+            @include('deliverable.create')
             <a class="btn btn-primary newDelivery">Ajouter</a>
         @endif
         @if($livrables->getNbItemsDone())
