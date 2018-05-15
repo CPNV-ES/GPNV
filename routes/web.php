@@ -70,7 +70,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::post('project/{id}/editDescription', 'ProjectController@editDescription')->where('id', '[0-9]+');
         #Route::post('project/{id}/quitProject/', ['as' => 'project.quitProject', 'uses' => 'ProjectController@quitProject'])->where('id', '[0-9]+');
-        Route::post('project/{id}/removeFromProject/{user}', 'ProjectController@removeUserFromProject')->where('id', '[0-9]+');
+        Route::post('project/{id}/removeFromProject/{user}',  ['as' => 'memberships.quitProject', 'uses' => 'MembershipController@removeUserFromProject'])->where('id', '[0-9]+');
 
         /*-----------------------------Routes CheckList --------------------------*/
         Route::get('project/{id}/checkListItem/{itemId}','CheckListController@showItem');
@@ -107,9 +107,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('logout', ['as' => 'logout','uses' => 'SessionController@destroy']);
 
         /* Add User */
-        Route::get('project/{id}/getStudents/', 'ProjectController@getStudents')->where('id', '[0-9]+');
-        Route::get('project/{id}/getTeachers/', 'ProjectController@getTeachers')->where('id', '[0-9]+');
-        Route::post('project/{id}/addUsers/', ['as' => 'project.addUsers', 'uses' => 'ProjectController@addUsers'])->where('id', '[0-9]+');
+        Route::get('project/{id}/memberships/', ['as' => 'memberships.show', 'uses' => 'MembershipController@show'])->where('id', '[0-9]+');
+        Route::get('project/{id}/memberships/getStudents/', ['as' => 'memberships.getStudents', 'uses' => 'MembershipController@getStudents'])->where('id', '[0-9]+');
+        Route::get('project/{id}/memberships/getTeachers/', ['as' => 'memberships.getTeachers', 'uses' => 'MembershipController@getTeachers'])->where('id', '[0-9]+');
+        Route::post('project/{id}/memberships/', ['as' => 'memberships.add', 'uses' => 'MembershipController@addUsers'])->where('id', '[0-9]+');
 
         /* USER */
         Route::get('user/{user}', ['as'=> 'user.show','uses'=>'UserController@show'])->where('user', '[0-9]+');
