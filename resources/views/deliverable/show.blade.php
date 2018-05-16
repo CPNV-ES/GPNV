@@ -2,6 +2,10 @@
 Created By: Fabio Marques
 Description: Show the checkList "Livrables"
 -->
+
+@extends('layouts.project')
+
+@section('projectContent')
 <div class="col-xs-12 col-lg-6">
   <div class="panel panel-default">
     <!-- Display all project informations like the members, a description and so on -->
@@ -47,6 +51,8 @@ Description: Show the checkList "Livrables"
     </div>
   </div>
 </div>
+@endsection
+
 @push('scripts')
     <script src="{{ URL::asset('deliverables.js') }}"></script>
 @endpush

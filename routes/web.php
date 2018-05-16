@@ -101,7 +101,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'FileController@show'])->where('id', '[0-9]+');
 
         Route::get('project/{id}/link/{check}', ['as' => 'deliveries.getToLink', 'uses' => 'ProjectController@getToLink']);
-        Route::post('project/{id}/link', ['as' => 'deliveries.link', 'uses' => 'ProjectController@LinkToDelivery']);
+        Route::post('project/{id}/link', ['as' => 'deliverable.link', 'uses' => 'DeliverableController@LinkTo']);
 
         /* APP */
         Route::get('logout', ['as' => 'logout','uses' => 'SessionController@destroy']);
@@ -136,11 +136,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('user/{search}',array('as' => 'name', 'uses' => 'UserController@search'));
 
         /* RELOAD ROUTES */
-        Route::get('project/{id}/deliveries', ['as' => 'project.showDeliveries', 'uses' => 'ProjectController@showDeliveries']);
+        Route::get('project/{id}/deliverables', ['as' => 'deliverables.show', 'uses' => 'DeliverableController@show']);
         Route::get('project/{id}/objectives', ['as' => 'objective.show', 'uses' => 'ObjectiveController@show']);
 
         /* DELETE ROUTE*/
-        Route::delete('project/{id}/deliverable/{deliveryId}', ['as' => 'project.deleteDelivery', 'uses' => 'ProjectController@deleteDelivery']);
+        Route::delete('project/{id}/deliverable/{deliveryId}', ['as' => 'deliverables.delete', 'uses' => 'DeliverableController@delete']);
         Route::delete('project/{id}/objective/{objectiveId}', ['as' => 'objective.delete', 'uses' => 'ObjectiveController@delete']);
 
         Route::post('tasktype', ['as' => 'taskType.store', 'uses' => 'TaskTypesController@store']);

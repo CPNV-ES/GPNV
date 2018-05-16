@@ -136,18 +136,6 @@ class ProjectController extends Controller
     }
 
     /**
-    * Return the view to see deliveries
-    * @param $projectID The project id
-    * @return view to see deliveries
-    */
-    public function showDeliveries($projectID){
-      $project = Project::find($projectID);
-      $deliveries = new CheckList('Project', $projectID, 'Livrables');
-      return view('project/delivery',['project' => $project, 'livrables'=>$deliveries]);
-    }
-
-
-    /**
     * Return the view to see files
     * @param $id The project id
     * @return view to see files
@@ -611,41 +599,7 @@ class ProjectController extends Controller
     }
 
 
-    /**
-    * Link a file or link to the selected delivery (Note: the delivery id is in the request parameter)
-    * @param $projectID Define the actual project id
-    * @param $request Define the request data send by POST
-    */
-    public function LinkToDelivery(Request $request, $ProjectID){
-      if( $request->input('check')==null || $request->input('type')==null || $request->input('data')==null) return redirect('project/' . $ProjectID);
-
-      $checkListID = $request->input('check');
-      $checkListItem = DB::table('checkList_Items')->where('id', $checkListID)->first();
-      if( $checkListItem==null ) return redirect('project/' . $ProjectID);
-
-      if($request->input('type')=="file"){
-        $file = DB::table('file')->where('id','=',$data)->first();
-        if( $file==null ) return redirect('project/' . $ProjectID);
-      }
-
-      DB::table('checkList_Items')->where('id', $checkListID)->update(['link' => $request->input('data')]);
-
-      return redirect()->route("project.show", ['id'=>$ProjectID]);
-
-    }
 
 
-
-    /**
-    * Delete selected delivery
-    * @param $projectID Define the actual project id
-    * @param $deliveryID Define the id of the 'checkList_Items' to delete
-    */
-    public function deleteDelivery($projectID, $deliveryID){
-      $delivery = DB::table('checkList_Items')->where('id', '=', $deliveryID);
-      $deliveryItemTitle = $delivery->first()->title;
-      $delivery->delete();
-      (new EventController())->logEvent($projectID, "Suppression du livrable \"" . $deliveryItemTitle . "\"");
-    }
 
 }
