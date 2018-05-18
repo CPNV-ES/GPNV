@@ -5,24 +5,53 @@
 */
 $(document).ready(function () {
   /**
-   * Add a new item on checkList
-   *
-   * @return form to insert a new checklist
+   * Add a new checkList
    */
-  $('.addCheckList').click(function () {
-      var id = this.getAttribute('data-id');
-      var productId = this.getAttribute('data-projectid');
-      var baseUrl = this.getAttribute('data-URL');
+  $(".newCheckList").click(function(e) {
+      e.preventDefault()
+      var div = $(this).parent('div'), form = div.parent('form'), url = form.attr('action'), title = form.children('div').children('#name').val()  //$('#name').val())
 
-      $.get(baseUrl+"/"+productId+"/checklist/"+id+"/create", {}, function (form) {
-          bootbox.dialog({
-              title: "Insérer un nouvel élément",
-              message: form
-          });
+      $.ajax({
+          url: url,
+          type: 'POST',
+          data: {name: title},
+          success: function (data) {
+              var result = $('<div />').append(data).find('.deliveriesData').html();
+              $(".deliveriesData").html(result);
+              var result = $('<div />').append(data).find('.objectivesData').html();
+              $(".objectivesData").html(result);
+              bootbox.hideAll();
+          }
       });
   });
 
+    $(document).on("click", 'a.removeObjective', function(event) {
+      var id = this.getAttribute('data-id');
+      var projectid = this.getAttribute('data-projectid');
+
+      bootbox.confirm("Voulez vous vraiment supprimer cet objectif ?", function (result) {
+          if (result) {
+              $.ajax({
+                  type: "DELETE",
+                  url: "/project/" + projectid + "/objective/" + id,
+                  success: function (data) {
+                      bootbox.alert("Objectif supprimé avec succès");
+                      $.ajax({
+                          url: "",
+                          type: 'get',
+                          success: function (data) {
+                              var result = $('<div />').append(data).find('.objectivesData').html();
+                              $(".objectivesData").html(result)
+                          }
+                      });
+                  }
+              });
+          }
+      });
+  })
+
   /**
+   *
    * switch view button hidde or not the completed items
    */
   $('.changeView').click(function(){

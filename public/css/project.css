@@ -14,3 +14,20 @@
     cursor: pointer;
     background-color: #ddd;
 }
+
+.navbar{
+    margin-bottom: 0;
+}
+
+.sidebar{
+    height: 100%;
+    text-align: center;
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: -20px;
+    border-right: #DDDDDD 1px;
+}
+
+.projectContainer{
+    margin-right: 30px;
+}

@@ -6,8 +6,6 @@
     <div class="row">
       @include('project.infos')
 
-      @include('project.objective', ['objectifs' => $objectifs])
-
       @include('project.membership')
 
       <div class="col-xs-12 col-lg-6">
@@ -94,9 +92,14 @@
 
       @include('project.logbook')
 
-      @include('project.delivery')
+      @include('delivery.show')
 
       @include('project.file')
     </div>
 </div>
+@push('scripts')
+    <script src="{{ URL::asset('js/tasks.js') }}"></script>
+    <script src="{{ URL::asset('js/scenario.js') }}"></script>
+    <script src="{{ URL::asset('js/app.js') }}"></script>
+@endpush
 @endsection

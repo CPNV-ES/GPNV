@@ -1,4 +1,4 @@
-<form method="post" action="{{$projectId}}/checkListItem/{{$checkListId}}/scenario/create">
+<form method="post" action="checkListItem/{{$checkListId}}/scenario/create">
   {{ csrf_field() }}
   {{ method_field('POST') }}
   <div class="form-group">

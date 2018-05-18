@@ -18,7 +18,10 @@ class FileController extends Controller
     /**
     * Show file
     */
-    public function show(){}
+    public function show($projectID){
+        $project = Project::find($projectID);
+        return view('file/show',['project' => $project]);
+    }
 
     /**
     * Save file
@@ -58,7 +61,7 @@ class FileController extends Controller
             $store->save();
         };
 
-        return redirect()->route("project.show", ['id'=>$id]);
+        return redirect()->route("files.show", ['id'=>$id]);
 
     }
 
