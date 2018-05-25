@@ -25,7 +25,7 @@ class ScenarioController extends Controller
   function show($projectId, $scenarioId){
     $scenario = Scenario::find($scenarioId);
     $project = Project::find($projectId);
-    return view('scenario.show', ['projectId'=>$projectId, 'scenario'=>$scenario, 'mockups' => $project->mockups]);
+    return view('scenario.show', ['projectId'=>$projectId, 'scenario'=>$scenario, 'mockups' => $project->mockups, 'project'=>$project] );
   }
 
   /**
@@ -101,7 +101,7 @@ class ScenarioController extends Controller
   }
 
   /**
-  * Add a step to scenario
+  * Add a step to scenario//
   * @param $projectId The current project id
   * @param $scenarioId The current scenario id
   * @param $requete Define the request data send by POST
@@ -177,16 +177,16 @@ class ScenarioController extends Controller
   * @param $scenarioId The current scenario id
   * @param $requete Define the request data send by POST
   */
-  public function changeMaquete($projectid, $scenarioId, Request $request){
-    $step = ScenarioStep::find($request->stepId);
-    $image = Mockup::find($request->mockupId);
-
-    if(isset($step) && isset($image))
-    {
-      $step->mockup_id = $image->id;
-      $step->save();
-    }
-  }
+//  public function changeMaquete($projectid, $scenarioId, Request $request){
+//    $step = ScenarioStep::find($request->stepId);
+//    $image = Mockup::find($request->mockupId);
+//
+//    if(isset($step) && isset($image))
+//    {
+//      $step->mockup_id = $image->id;
+//      $step->save();
+//    }
+//  }
 
   /**
   * Delete maquette picture

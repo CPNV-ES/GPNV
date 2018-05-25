@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.project')
 
-@section('content')
-  <div class="scenario container">
+@section('projectContent')
+  <div class="scenario">
     <div class="row">
       <div class="col-xs-12">
         <a href="{{route('project.show', $projectId)}}" class="btn btn-primary btn-retour">
@@ -52,7 +52,7 @@
             <?php $order=0;?>
           @foreach($scenario->steps as $step)
                 <?php $order++?>
-            <form id="formStep" method="post" class="tableRow" action="{{route('scenario.item.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+            <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.update', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
               {{ csrf_field() }}
               {{ method_field('PUT') }}
               <input type="hidden" name="id" value="{{$step->id}}">
@@ -81,7 +81,7 @@
 
               <!-- Delete Step cell-->
               <div>
-                <a href="{{route('scenario.del.item', array('projectId'=>$projectId, 'stepId'=>$step->id))}}" id="delStep_{{$step->id}}" name="submit" class="btn btn-danger hidden" type="button">
+                <a href="{{route('scenario_steps.destroy', array('projectId'=>$projectId, 'stepId'=>$step->id))}}" id="delStep_{{$step->id}}" name="submit" class="btn btn-danger hidden" type="button">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
               </div>
@@ -89,7 +89,7 @@
           @endforeach
 
           <h2>Nouvelle etape</h2>
-          <form method="post" class="tableRow" action="{{route('scenario.create.item', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
+          <form method="post" class="tableRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
 
             {{ csrf_field() }}
             {{ method_field('POST') }}
@@ -145,3 +145,7 @@
       var del_image_route = "{{route('scenario.delMaquete', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}";
   </script>
 @endsection
+
+@push('projectScripts')
+  <script src="{{ URL::asset('js/scenario.js') }}"></script>
+@endpush

@@ -111,3 +111,70 @@ function updateStep(form, element){
     })
   }
 }
+
+
+$(document).ready(function() {
+    alert("Hello");
+    //Click on "Modifier" = Hide modifier, show buttons "Annuler" and "Enregistrer" + open edit field
+    $('#modifyDescription').click(function () {
+        $(this).addClass("hidden");
+        $('#cancelDescription').removeClass("hidden");
+        $('#saveDescription').removeClass("hidden");
+
+        $('#projectDescriptionP').addClass("hidden");
+        $('#projectDescriptionInput').removeClass("hidden");
+        $('#projectNameP').addClass("hidden");
+        $('#projectNameInput').removeClass("hidden");
+        $('#slideValidated').prop('disabled', false);
+        $('#slideTested').prop('disabled', false);
+
+    })
+
+    //Click on "Annuler" = hide buttons and show "Modifier" + cant edit field
+    $('#cancelDescription').click(function(){
+        $('#cancelDescription').addClass("hidden");
+        $('#saveDescription').addClass("hidden");
+        $('#modifyDescription').removeClass("hidden");
+
+        $('#projectDescriptionP').removeClass("hidden");
+        $('#projectDescriptionInput').addClass("hidden");
+        $('#projectNameP').removeClass("hidden");
+        $('#projectNameInput').addClass("hidden");
+        $('#slideValidated').prop('disabled', true);
+        $('#slideTested').prop('disabled', true);
+    })
+
+
+    //Click on "edit" to modify step per step
+    $('.modifyStep').click(function(){
+        var btn = $(this).attr('id');
+        var id = btn.match(/_([^ ]*)/)[1];
+
+        //Show edit field + button
+        $('#stepAction1_'+id).addClass("hidden");
+        $('#stepResult1_'+id).addClass("hidden");
+        $('#stepAction_'+id).removeClass("hidden");
+        $('#stepResult_'+id).removeClass("hidden");
+        $('#'+btn).addClass("hidden");
+        $('#delStep_'+id).removeClass("hidden");
+        $('#delCellStep').removeClass("hidden");
+        $('#validateStep_'+id).removeClass("hidden");
+    })
+
+    $('.addStep').click(function(){
+        var btn = $(this).attr('id');
+        var id = btn.match(/_([^ ]*)/)[1];
+        var newValueAction = $('#stepAction_'+id)["0"].value;
+        var newValueResponse =$('#stepResult_'+id)["0"].value;
+        var requete = {action: newValueAction, result: newValueResponse};
+        //Return to initial view
+        $('#stepAction1_'+id).removeClass("hidden");
+        $('#stepResult1_'+id).removeClass("hidden");
+        $('#stepAction_'+id).addClass("hidden");
+        $('#stepResult_'+id).addClass("hidden");
+        $('#modifyStep_'+id).removeClass("hidden");
+        $('#delStep_'+id).addClass("hidden");
+        $('#delCellStep').addClass("hidden");
+        $('#validateStep_'+id).addClass("hidden");
+    })
+})

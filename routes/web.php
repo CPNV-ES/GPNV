@@ -39,6 +39,8 @@ Route::group(['middleware' => 'web'], function () {
             ]
         );
 
+
+
         Route::delete('delivery/unlink/{checkList_id}/', ['as' => 'delivery.unlink', 'uses' => 'CheckListController@unlink']);
 
         Route::get('tasks/{task}/',['as' => 'tasks.show','uses' => 'TaskController@show'])->where('task', '[0-9]+');
@@ -84,14 +86,21 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('project/{id}/deleteScenario/{scenarioId}',['as' => 'scenario.delete', 'uses' => 'ScenarioController@delete']);
         Route::get('project/{id}/checkListItem/{itemId}/scenario/create','ScenarioController@addItem');
         Route::post('project/{id}/checkListItem/{itemId}/scenario/create','ScenarioController@store');
-        Route::post('project/{id}/scenario/{scenarioId}/create',['as'=>'scenario.create.item', 'uses' => 'ScenarioController@addStep']);
-        Route::put('project/{id}/scenario/{scenarioId}/item/{itemId}',['as'=>'scenario.item.modify', 'uses' => 'ScenarioController@updateStep']);
+        // Route::post('project/{id}/scenario/{scenarioId}/create',['as'=>'scenario.create.item', 'uses' => 'ScenarioController@addStep']);
+        // Route::put('project/{id}/scenario/{scenarioId}/item/{itemId}',['as'=>'scenario.item.modify', 'uses' => 'ScenarioController@updateStep']);
         Route::put('project/{id}/scenario/{scenarioId}',['as'=>'scenario.modify', 'uses' => 'ScenarioController@update']);
-        Route::get('project/{id}/scenario/{stepId}/delete',['as'=>'scenario.del.item', 'uses' => 'ScenarioController@delStep']);
+        // Route::get('project/{id}/scenario/{stepId}/delete',['as'=>'scenario.del.item', 'uses' => 'ScenarioController@delStep']);
         Route::post('project/{id}/scenario/{scenarioId}/uploadMaquete', ['as' => 'scenario.uploadMaquete', 'uses' => 'ScenarioController@uploadMaquete']);
-        Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario.changeMaquete', 'uses' => 'ScenarioController@changeMaquete']);
+       //  Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario.changeMaquete', 'uses' => 'ScenarioController@changeMaquete']);
         Route::delete('project/{id}/scenario/{scenarioId}/delMaquete', ['as' => 'scenario.delMaquete', 'uses' => 'ScenarioController@delMaquete']);
         /*--------------------- Routes objectifs -----------------------------*/
+
+        /* SCENARIOSTEP */
+        //Route::resource('scenario_steps', 'ScenarioStepController');
+        Route::post('project/{id}/scenario/{scenarioId}/create', 'ScenarioStepController@create');
+        Route::post('project/{id}/scenario/{scenarioId}/item/{itemId}', 'ScenarioStepController@update');
+        Route::get('project/{id}/scenario/{stepId}/delete','ScenarioStepController@destroy');
+        Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario.changeMaquete', 'uses' => 'ScenarioStepController@changeMaquete']);
 
         /* FILES */
         Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store']);
