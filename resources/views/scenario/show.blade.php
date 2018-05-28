@@ -52,7 +52,7 @@
             <?php $order=0;?>
           @foreach($scenario->steps as $step)
                 <?php $order++?>
-            <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.update', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+            <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
               {{ csrf_field() }}
               {{ method_field('PUT') }}
               <input type="hidden" name="id" value="{{$step->id}}">
@@ -141,7 +141,7 @@
     </div>
   </div>
   <script>
-      var update_image_route = "{{ route('scenario.changeMaquete', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id)) }}";
+      var update_image_route = "{{ route('scenario_steps.changeMaquete', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id)) }}";
       var del_image_route = "{{route('scenario.delMaquete', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}";
   </script>
 @endsection

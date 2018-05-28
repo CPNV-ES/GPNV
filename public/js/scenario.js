@@ -114,7 +114,6 @@ function updateStep(form, element){
 
 
 $(document).ready(function() {
-    alert("Hello");
     //Click on "Modifier" = Hide modifier, show buttons "Annuler" and "Enregistrer" + open edit field
     $('#modifyDescription').click(function () {
         $(this).addClass("hidden");

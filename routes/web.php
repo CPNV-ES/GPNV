@@ -97,10 +97,10 @@ Route::group(['middleware' => 'web'], function () {
 
         /* SCENARIOSTEP */
         //Route::resource('scenario_steps', 'ScenarioStepController');
-        Route::post('project/{id}/scenario/{scenarioId}/create', 'ScenarioStepController@create');
-        Route::post('project/{id}/scenario/{scenarioId}/item/{itemId}', 'ScenarioStepController@update');
-        Route::get('project/{id}/scenario/{stepId}/delete','ScenarioStepController@destroy');
-        Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario.changeMaquete', 'uses' => 'ScenarioStepController@changeMaquete']);
+        Route::post('project/{id}/scenario/{scenarioId}/create', ['as'=>'scenario_steps.create', 'uses' => 'ScenarioStepController@create']);
+        Route::post('project/{id}/scenario/{scenarioId}/item/{itemId}', ['as'=>'scenario_steps.modify', 'uses' => 'ScenarioStepController@update']);
+        Route::get('project/{id}/scenario/{stepId}/delete',['as'=>'scenario_steps.destroy', 'uses' => 'ScenarioStepController@destroy']);
+        Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario_steps.changeMaquete', 'uses' => 'ScenarioStepController@changeMaquete']);
 
         /* FILES */
         Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store']);

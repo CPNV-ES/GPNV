@@ -107,19 +107,19 @@ class ScenarioController extends Controller
   * @param $requete Define the request data send by POST
   * @return to previous page
   */
-  function addStep($projectId, $scenarioId, Request $requete){
-    $order = ScenarioStep::where('scenario_id', $scenarioId)->max('order')+1;
-
-    $step = new ScenarioStep;
-    $step->action = $requete->action;
-    $step->result = $requete->reponse;
-    $step->order = $order;
-    $step->scenario_id = $scenarioId;
-
-    $step->save();
-
-    return redirect()->back();
-  }
+ // function addStep($projectId, $scenarioId, Request $requete){
+ //   $order = ScenarioStep::where('scenario_id', $scenarioId)->max('order')+1;
+//
+ //   $step = new ScenarioStep;
+ //   $step->action = $requete->action;
+ //   $step->result = $requete->reponse;
+ //   $step->order = $order;
+ //   $step->scenario_id = $scenarioId;
+//
+ //   $step->save();
+//
+ //   return redirect()->back();
+ // }
 
   /**
   * Delete a step to scenario
