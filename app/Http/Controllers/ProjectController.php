@@ -584,19 +584,6 @@ class ProjectController extends Controller
         }
     }
 
-    /**
-    * Get files to link and view
-    * @param $ProjectId The current project id
-    * @return view of files or url to link
-    */
-    public function getToLink($projectID, $check){
-      $Project = Project::find($projectID);
-
-      $linkedFiles = DB::table('checkList_Items')->whereNotNull('link')->pluck('link');
-      $filesInProject = $Project->files()->whereNotIn('id', $linkedFiles)->get();
-
-      return view('project.toLink', ['project' => $Project, 'files' => $filesInProject, 'checkID'=> $check]);
-    }
 
 
 
