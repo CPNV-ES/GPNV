@@ -3,7 +3,7 @@ Created By: Antonio Giordano
 Description: Form to add a new checkList
 Requirement: Link checkList.js
 -->
-<div class="form-new-deliverable" style="max-height: 35px;">
+<div class="form-new-deliverable">
     <form class="form-horizontal" role="form" id="form" action="{{ URL('project') }}/{{$project->id}}/checklist/{{$livrables->getId()}}/create">
         <div class="col-md-6">
             {{ csrf_field() }}
