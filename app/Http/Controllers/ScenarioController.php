@@ -157,7 +157,7 @@ class ScenarioController extends Controller
       if($request->file('maquette')->isValid()){
         $file = $request->file('maquette');
         $newName = uniqid('img').".".$file->getClientOriginalExtension();
-        $path = $file->move("mockups/$projectid/", $newName);
+        $path = $file->move("mockup/$projectid/", $newName);
 
         $project = Project::find($projectid);
 
@@ -177,16 +177,16 @@ class ScenarioController extends Controller
   * @param $scenarioId The current scenario id
   * @param $requete Define the request data send by POST
   */
-//  public function changeMaquete($projectid, $scenarioId, Request $request){
-//    $step = ScenarioStep::find($request->stepId);
-//    $image = Mockup::find($request->mockupId);
-//
-//    if(isset($step) && isset($image))
-//    {
-//      $step->mockup_id = $image->id;
-//      $step->save();
-//    }
-//  }
+  public function changeMaquete($projectid, $scenarioId, Request $request){
+    $step = ScenarioStep::find($request->stepId);
+    $image = Mockup::find($request->mockupId);
+
+    if(isset($step) && isset($image))
+    {
+      $step->mockup_id = $image->id;
+      $step->save();
+    }
+  }
 
   /**
   * Delete maquette picture
@@ -198,7 +198,7 @@ class ScenarioController extends Controller
     $image = Mockup::find($request->mockupId);
 
     if(!is_null($image)){
-      $filename = "mockups/$projectid/".$image->url;
+      $filename = "mockup/$projectid/".$image->url;
 
       if($image->delete())
         File::delete($filename);
