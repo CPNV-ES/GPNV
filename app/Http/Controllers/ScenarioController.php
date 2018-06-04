@@ -25,7 +25,7 @@ class ScenarioController extends Controller
   function show($projectId, $scenarioId){
     $scenario = Scenario::find($scenarioId);
     $project = Project::find($projectId);
-    return view('scenario.show', ['projectId'=>$projectId, 'scenario'=>$scenario, 'mockups' => $project->mockups]);
+    return view('scenario.show', ['projectId'=>$projectId, 'scenario'=>$scenario, 'mockups' => $project->mockups, 'project'=>$project] );
   }
 
   /**
@@ -101,25 +101,25 @@ class ScenarioController extends Controller
   }
 
   /**
-  * Add a step to scenario
+  * Add a step to scenario//
   * @param $projectId The current project id
   * @param $scenarioId The current scenario id
   * @param $requete Define the request data send by POST
   * @return to previous page
   */
-  function addStep($projectId, $scenarioId, Request $requete){
-    $order = ScenarioStep::where('scenario_id', $scenarioId)->max('order')+1;
-
-    $step = new ScenarioStep;
-    $step->action = $requete->action;
-    $step->result = $requete->reponse;
-    $step->order = $order;
-    $step->scenario_id = $scenarioId;
-
-    $step->save();
-
-    return redirect()->back();
-  }
+ // function addStep($projectId, $scenarioId, Request $requete){
+ //   $order = ScenarioStep::where('scenario_id', $scenarioId)->max('order')+1;
+//
+ //   $step = new ScenarioStep;
+ //   $step->action = $requete->action;
+ //   $step->result = $requete->reponse;
+ //   $step->order = $order;
+ //   $step->scenario_id = $scenarioId;
+//
+ //   $step->save();
+//
+ //   return redirect()->back();
+ // }
 
   /**
   * Delete a step to scenario
@@ -157,7 +157,7 @@ class ScenarioController extends Controller
       if($request->file('maquette')->isValid()){
         $file = $request->file('maquette');
         $newName = uniqid('img').".".$file->getClientOriginalExtension();
-        $path = $file->move("mockups/$projectid/", $newName);
+        $path = $file->move("mockup/$projectid/", $newName);
 
         $project = Project::find($projectid);
 
@@ -198,7 +198,7 @@ class ScenarioController extends Controller
     $image = Mockup::find($request->mockupId);
 
     if(!is_null($image)){
-      $filename = "mockups/$projectid/".$image->url;
+      $filename = "mockup/$projectid/".$image->url;
 
       if($image->delete())
         File::delete($filename);
