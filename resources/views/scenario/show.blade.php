@@ -54,7 +54,7 @@
                 <?php $order++?>
             <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
               {{ csrf_field() }}
-              {{ method_field('PUT') }}
+              {{ method_field('POST') }}
               <input type="hidden" name="id" value="{{$step->id}}">
               <input type="hidden" name="order" value="{{ $step->order }}">
               <input type="hidden" name="mockup" value="@if(isset($step->mockup)) {{$step->mockup->id}} @endif">

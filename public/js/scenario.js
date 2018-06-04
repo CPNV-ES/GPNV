@@ -165,7 +165,9 @@ $(document).ready(function() {
         var id = btn.match(/_([^ ]*)/)[1];
         var newValueAction = $('#stepAction_'+id)["0"].value;
         var newValueResponse =$('#stepResult_'+id)["0"].value;
-        var requete = {action: newValueAction, result: newValueResponse};
+
+        console.log(newValueAction);
+        console.log(newValueResponse);
         //Return to initial view
         $('#stepAction1_'+id).removeClass("hidden");
         $('#stepResult1_'+id).removeClass("hidden");
@@ -175,5 +177,20 @@ $(document).ready(function() {
         $('#delStep_'+id).addClass("hidden");
         $('#delCellStep').addClass("hidden");
         $('#validateStep_'+id).addClass("hidden");
+        $('#stepAction1_'+id).text(newValueAction);
+        $('#stepResult1_'+id).text(newValueResponse);
+
+
+        var data0 = {action: newValueAction, response : newValueResponse};
+        var request = JSON.stringify(data0 );
+
+        $.ajax({
+            url : 'scenario_steps.modify',
+            type : 'POST',
+            data : {itemId: id, request: request},
+            success : function(modify){
+            }
+        })
     })
+
 })
