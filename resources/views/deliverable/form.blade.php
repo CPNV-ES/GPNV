@@ -1,59 +1,51 @@
-<form class="form" role="form" method="POST" action="{{ route('deliveries.link', $project->id) }}">
-  {!! csrf_field() !!}
+<form class="form" role="form" method="POST"
+      action="{{ URL('project') . "/" . $project->id . "/link/" . $checkListItem->id, $project->id }}">
+    {!! csrf_field() !!}
 
-  <script>
-      $(document).ready(function () {
-        $('button.change').click(function () {
-          if($(this).text()=="Choisir un fichier"){
-            $(this).text("Choisir un lien");
-            $('fieldset#file').prop("disabled", false);
-            $('fieldset#url').prop("disabled", true);
-            $('input.valueType').val("url");
-          }
-          else{
-            $(this).text("Choisir un fichier");
-            $('fieldset#url').prop("disabled", false);
-            $('fieldset#file').prop("disabled", true);
-            $('input.valueType').val("file");
-          }
-        });
-      });
-  </script>
-
-  @if(count($files)!=0)
-    <fieldset class="form-group" id="file" disabled>
-    <legend>Fichiers</legend>
-      @foreach($files as $file)
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" value="{{$file->id}}" name="data">
-            {{$file->name}}
-          </label>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <legend><input type="checkbox" checked data-toggle="toggle" data-on="URL" data-off="Fichiers"
+                           data-onstyle="info" data-offstyle="info" class="toggleDeliverable" id="toggleDeliverable"
+                           data-width="100" @if(count($files)!=0) ></legend> @else disabled><p
+                    class="text-danger msg-no-file"> Aucun fichier n'est disponible pour ce projet</p></legend> @endif
+            <fieldset class="form-group" id="url">
+                <div class="col-md-12 col-sm-12 urlform{{$checkListItem->id}}">
+                    <input type="url" name="data" class="form-control url-input{{$checkListItem->id}}" id="url"
+                           aria-describedby="url"
+                           placeholder="Entrez l'URL ici" required>
+                </div>
+            </fieldset>
+            <div class="col-md-12 col-sm-12 hidden fileform{{$checkListItem->id}}">
+                @if(count($files)!=0)
+                    <fieldset class="form-group" id="file">
+                        @foreach($files as $file)
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="file-input{{$checkListItem->id}}" value="{{$file->id}}"
+                                           name="data">
+                                    {{$file->name}}
+                                </label>
+                            </div>
+                        @endforeach
+                    </fieldset>
+                @else
+                @endif
+                <input type="hidden" class="valueType" name="type" value="url">
+                <input type="hidden" name="check" value="">
+            </div>
         </div>
-      @endforeach
-    </fieldset>
-  @else
-    <div>Aucun fichier n'est disponible pour ce projet</div>
-  @endif
-
-  <input type="hidden" class="valueType" name="type" value="url">
-  <input type="hidden" name="check" value="{{$checkID}}">
-
-  <fieldset class="form-group" id="url">
-  <legend>Lien</legend>
-    <label for="url">URL: </label>
-    <input type="url" name="data" class="form-control" id="url" aria-describedby="url" placeholder="Entrez l'URL ici">
-  </fieldset>
-
-  <br>
-  <div class="form-group">
-     <div class="col-md-6 col-md-offset-4">
-        @if(count($files)!=0)
-          <button type="button" class="btn btn-secondary change">Choisir un fichier</button>
-        @endif
-        <button type="submit" class="btn btn-primary pull-right">
-          <i class="fa fa-btn fa-plus"></i>Lier le lien
-        </button>
-     </div>
-  </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary to-link{{$checkListItem->id}}">
+                <i class="fa fa-btn fa-plus"></i>Lier le lien
+            </button>
+        </div>
+    </div>
 </form>
+
+@push('projectScripts')
+<script> $(function () {
+        $('#toggleDeliverable').bootstrapToggle();
+    }) </script>
+@endpush
