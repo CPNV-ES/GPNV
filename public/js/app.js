@@ -376,10 +376,6 @@ $(document).ready(function () {
                 // console.log(content);
                 $('#logTable').html(content);
 
-                // enabling bootstrap tooltips
-                $('[data-toggle="tooltip"]').tooltip();
-
-
                 $('.validationButton').click(function() {
                     updateValidationStatus(this);
                 });
@@ -514,57 +510,6 @@ $(document).ready(function () {
         });
     });
 
-    // Link file with delivery
-    $(document).on("click", 'a.linkDelivery', function(event) {
-        //$('a.linkDelivery').click(function () {
-        var deliveryID = this.getAttribute('data-id');
-        var projectID = this.getAttribute('data-projectid');
-
-        $.get("{{ url('project') }}/" + projectID + "/link/" + deliveryID, function (projectid) {
-            bootbox.dialog({
-                title: "Choisir le lien",
-                message: projectid
-            })
-        });
-    });
-
-    $('a.removeLink').click(function () {
-        var checkListID = this.getAttribute('data-id');
-
-        bootbox.confirm({
-            title: "Voulez-vous delier ce fichier/lien ?",
-            message: "Cette action deliera le fichier/lien de ce livrable et le rendra disponible pour d'autres livrables",
-            buttons: {
-                cancel: {
-                    label: '<i class="fa fa-times"></i> Retour',
-                    className: 'btn-success'
-                },
-                confirm: {
-                    label: '<i class="fa fa-check"></i> Délier le fichier/lien',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function(result){
-                if (result) {
-                    $.ajax({
-                        url: "{{ url('delivery/unlink/') }}/" + checkListID,
-                        type: "DELETE",
-                        data: { _method: "DELETE"},
-                        success: function() {
-                            bootbox.alert("Fichier/lien délié avec succés.");
-                            location.reload();
-                        },
-                        error: function() {
-                            console.log(result);
-                        }
-                    });
-                }
-            }
-        });
-    });
-
-    // Tooltip handling (enabling bootstrap tooltips)
-    $('[data-toggle="tooltip"]').tooltip();
 
     function updateCheckBoxStatus() {
         if ($('#toggleUserEntries').prop( "checked" )) {
@@ -692,33 +637,6 @@ $(document).ready(function () {
         });
     });
 
-
-
-    // Delete delivery of project
-    $(document).on("click", 'a.removeDelivery', function(event) {
-        var id = this.getAttribute('data-id');
-        var projectid = this.getAttribute('data-projectid');
-
-        bootbox.confirm("Voulez vous vraiment supprimer ce livrable ? ", function (result) {
-            if (result) {
-                $.ajax({
-                    type: "DELETE",
-                    url: projectid + "/delivery/" + id,
-                    success: function (data) {
-                        bootbox.alert("Livrable supprimé avec succès");
-                        $.ajax({
-                            url: "{{ route('project.showDeliveries', '@') }}".replace('@', projectid),
-                            type: 'get',
-                            success: function (data) {
-                                var result = $('<div />').append(data).find('.deliveriesData').html();
-                                $(".deliveriesData").html(result)
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    });
 
 
 });
