@@ -11,7 +11,7 @@ Requirement: Link checkList.js
             <input type="hidden" name="description" value="">
         </div>
         <div class="col-md-1">
-            <button type="button" class="newCheckList btn btn-primary" aria-hidden="true">Ajouter</button>
+            <button type="button" class="newDeliverable btn btn-primary" aria-hidden="true">Ajouter</button>
         </div>
     </form>
 </div>

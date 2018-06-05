@@ -30,7 +30,7 @@ Description: Show the checkList "Livrables"
                     <!-- Display all deliverables -->
                     @if($livrables->showToDo())
                         @foreach($livrables->showToDo() as $checkListItem)
-                            @include('checkList.show', array('checkListItem'=>$checkListItem, 'projectId'=>$project->id, 'fileData'=>$livrables->getLink($checkListItem->link), 'file'=>true ))
+                            @include('deliverable.checklist', array('checkListItem'=>$checkListItem, 'projectId'=>$project->id, 'fileData'=>$livrables->getLink($checkListItem->link), 'file'=>true ))
                         @endforeach
                     @endif
                 </div>
@@ -38,7 +38,7 @@ Description: Show the checkList "Livrables"
                     <h3>Effectués</h3>
                     @if($livrables->showCompleted())
                         @foreach($livrables->showCompleted() as $checkListItem)
-                            @include('checkList.show', array('checkListItem'=>$checkListItem, 'projectId'=>$project->id, 'fileData'=>$livrables->getLink($checkListItem->link), 'file'=>true ))
+                            @include('deliverable.checklist', array('checkListItem'=>$checkListItem, 'projectId'=>$project->id, 'fileData'=>$livrables->getLink($checkListItem->link), 'file'=>true ))
                         @endforeach
                     @endif
                 </div>
@@ -56,6 +56,5 @@ Description: Show the checkList "Livrables"
 @endsection
 
 @push('projectScripts')
-<script src="{{ URL::asset('js/deliverables.js') }}"></script>
-<script src="{{ URL::asset('js/checkList.js') }}"></script>
+    <script src="{{ URL::asset('js/deliverables.js') }}"></script>
 @endpush
