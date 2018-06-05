@@ -73,9 +73,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('project/{id}/removeFromProject/{user}', 'ProjectController@removeUserFromProject')->where('id', '[0-9]+');
 
         /*-----------------------------Routes CheckList --------------------------*/
-        Route::get('project/{id}/checkListItem/{itemId}','CheckListController@showItem');
-        Route::get('project/{id}/checklist/{CheckListId}/create','ProjectController@createCheckListItem');
-        Route::put('project/{id}/id/{CheckListId}','CheckListController@update');
         Route::post('project/{id}/checklist/{CheckListId}/create','CheckListController@store');
         /*--------------------------------------------------------------------*/
 
@@ -100,8 +97,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store'])->where('id', '[0-9]+');
         Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'FileController@show'])->where('id', '[0-9]+');
 
-        Route::get('project/{id}/link/{check}', ['as' => 'deliveries.getToLink', 'uses' => 'ProjectController@getToLink']);
-        Route::post('project/{id}/link', ['as' => 'deliverable.link', 'uses' => 'DeliverableController@LinkTo']);
+        Route::get('project/{id}/link/{check}', ['as' => 'deliverable.getToLink', 'uses' => 'DeliverableController@getToLink']);
+        Route::post('project/{id}/link/{check}', ['as' => 'deliverable.link', 'uses' => 'DeliverableController@LinkTo']);
 
         /* APP */
         Route::get('logout', ['as' => 'logout','uses' => 'SessionController@destroy']);
@@ -136,7 +133,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('user/{search}',array('as' => 'name', 'uses' => 'UserController@search'));
 
         /* RELOAD ROUTES */
-        Route::get('project/{id}/deliverables', ['as' => 'deliverables.show', 'uses' => 'DeliverableController@show']);
+        Route::get('project/{id}/deliverables', ['as' => 'deliverable.show', 'uses' => 'DeliverableController@show']);
         Route::get('project/{id}/objectives', ['as' => 'objective.show', 'uses' => 'ObjectiveController@show']);
 
         /* DELETE ROUTE*/
