@@ -62,3 +62,13 @@
 .completed{
   margin-top: 20px;
 }
+
+.checklist-item{
+  max-height: 35px;
+}
+
+.icon-checklist{
+  position: relative;
+  top: -8px;
+  background-color: unset;
+}
