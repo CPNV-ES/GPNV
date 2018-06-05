@@ -1,6 +1,7 @@
 <!--
   Created By: Fabio Marques
-  Description: View to show each item of the checkList
+  Updated By: Antonio Giordano
+  Description: View to show the checkList for deliverables
 -->
 <div class="well well-sm checklist-item">
     <div class="media">
@@ -22,7 +23,7 @@
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </a>
                     @elseif($fileData!=null)
-                        <a class="btn removeLink pull-right icon-checklist" data-id="{{$checkListItem->id}}">
+                        <a class="btn removeLink pull-right icon-checklist" data-id="{{$checkListItem->id}}" data-projectid="{{$project->id}}">
                             <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
                         </a>
                         <a class="btn pull-right icon-checklist" data-id="{{$checkListItem->id}}"
