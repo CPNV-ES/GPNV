@@ -27,7 +27,7 @@
                     <a href="{{route('files.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'files.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-copy"></i><br>Fichiers</h3>
                     </a>
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.showDeliveries') ? 'active' : '' }}">
+                    <a href="{{route('deliverable.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'deliverable.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-list-ol"></i><br>Livrables</h3>
                     </a>
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == '') ? 'active' : '' }}">
