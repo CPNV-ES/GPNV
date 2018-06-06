@@ -36,7 +36,7 @@
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                         <div id="{{$checkListItem->id}}" class="col-md-12 hidden">
-                            @include("project.toLink")
+                            @include("deliverable.form")
                         </div>
                     @endif
                 @endif
