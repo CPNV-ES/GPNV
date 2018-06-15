@@ -79,12 +79,7 @@
 </nav>
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-
 @yield('content')
-<a id="ancre" class="btn btn-default btn-lg" href="#top">
-  <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-</a>
-
 <script src="{{ URL::asset('js/jquery.2.1.4.min.js') }}"></script>
 <script src="{{ URL::asset('js/jquery.ntm.js') }}"></script>
 <script src="{{ URL::asset('js/bootbox.min.js') }}"></script>

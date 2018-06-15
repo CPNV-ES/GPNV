@@ -90,50 +90,9 @@ class ScenarioController extends Controller
     return redirect()->back();
   }
 
-  /**
-  * Add a step to scenario
-  * @param $projectId The current project id
-  * @param $scenarioId The current scenario id
-  * @param $requete Define the request data send by POST
-  * @return to previous page
-  */
- // function addStep($projectId, $scenarioId, Request $requete){
- //   $order = ScenarioStep::where('scenario_id', $scenarioId)->max('order')+1;
-//
- //   $step = new ScenarioStep;
- //   $step->action = $requete->action;
- //   $step->result = $requete->reponse;
- //   $step->order = $order;
- //   $step->scenario_id = $scenarioId;
-//
- //   $step->save();
-//
- //   return redirect()->back();
- // }
 
-  /**
-  * Delete a step to scenario
-  * @param $projectId The current project id
-  * @param $scenarioId The current scenario id
-  * @return to previous page
-  */
-  function delStep($projectId, $stepId){
-    DB::table('steps')->delete($stepId);
-    return redirect()->back();
-  }
 
-  /**
-  * update scenarioItem
-  * @param $projectId The current project id
-  * @param $scenarioId The current scenario id
-  * @param $itemId The scenarioItem id
-  * @param $requete Define the request data send by POST
-  * @return to previous page
-  */
-  function updateStep($projectid, $scenarioId, $itemId, Request $requete){
-    DB::table('steps')->where('id', $itemId)->update(array('order'=>$requete->order, 'action'=>$requete->action, 'result'=>$requete->reponse));
-    return redirect()->back();
-  }
+  // Image / Mockups
 
   /**
   * Upload maquette picture
