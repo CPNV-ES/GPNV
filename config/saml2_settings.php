@@ -1,6 +1,7 @@
 <?php
 //This is variable is an example - Just make sure that the urls in the 'idp' config are ok.
 $idp_host = env('SAML2_IDP_HOST', 'http://intranet.cpnv.ch/saml');
+
 return $settings = array(
     /**
      * If 'useRoutes' is set to true, the package defines five new routes:
@@ -64,15 +65,15 @@ return $settings = array(
         'privateKey' => env('SAML2_SP_PRIVATEKEY',''),
         // Identifier (URI) of the SP entity.
         // Leave blank to use the 'saml_metadata' route.
-        'entityId' => env('HOST_URL','').'/saml2/metadata',
+        'entityId' => env('HOST_URL', '').'/saml2/metadata', //'',// url('/').'/saml2/metadata',
         // Specifies info about where and how the <AuthnResponse> message MUST be
-        // returned to the requester, in this case our SP.
+    // returned to the reques   ter, in this case our SP.
         'assertionConsumerService' => array(
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-POST binding.
             // Leave blank to use the 'saml_acs' route
             // http://sc-c332-pc06.cpnv.ch/saml2/login/acs
-            'url' => env('HOST_URL','').'/saml2/acs',
+            'url' =>  env('HOST_URL', '').'/saml2/acs', //,//url('/').'/saml2/acs',
         ),
         // Specifies info about where and how the <Logout Response> message MUST be
         // returned to the requester, in this case our SP.
@@ -81,7 +82,7 @@ return $settings = array(
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-Redirect binding.
             // Leave blank to use the 'saml_sls' route
-            'url' => env('HOST_URL','').'/saml2/sls',
+            'url' =>  env('HOST_URL', '').'/saml2/sls', //'',// url('/').'/saml2/sls',
         ),
     ),
     // Identity Provider Data that we want connect with our SP

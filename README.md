@@ -33,9 +33,17 @@ for generating the database structure and adding the test data.
 >If you are on Linux os make sure that laravel has the necessary rights on the website directory
 
 ### Server login
-For SAML authentication work, your machine name (sc-c3XX-pcXX.cpnv.ch) must be referenced in the SAML server of the intranet.
+For SAML authentication work, your machine name (sc-c3XX-pcXX.cpnv.ch) must be referenced in the SAML server of the intranet. You need to put this on the SAML server :
+```
+$metadata['http://sc-c3XX-pcXX.cpnv.ch/saml2/metadata'] = array(
+    'AssertionConsumerService' => 'http://sc-c3XX-pcXX.cpnv.ch/saml2/acs',
+    'SingleLogoutService' => 'http://sc-c3XX-pcXX.cpnv.ch/saml2/sls',
+    'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
+    'simplesaml.nameidattribute' => 'uid'
+);
+```
 
-On your side, if you use Homestead, you must redirect port 80 to port 80 (in the homestead.yaml file) and in the.env file, you must change the parameter as such: HOST_URL=http://sc-c3XX-pcXX.cpnv.ch
+On your side, if you use Homestead, you must redirect host port 80 to virtual port 80 (in the homestead.yaml file) and in the.env file, you must change the parameter as such: HOST_URL=http://sc-c3XX-pcXX.cpnv.ch
 
 After that, you can login in GPNV with your intranet account.
 
@@ -59,6 +67,9 @@ When all those things are done, the website can be upload on the server by ftp.
 
 ## Credits
 Web developers :
+ - GIORDANO Antonio
+ - JORDIL Kevin
+ - RICHOZ Julien
  - BAZZARI Raphaël
  - MARCOUP Thomas
  - SILVA-MARQUES Fabio-Manuel

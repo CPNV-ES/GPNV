@@ -70,7 +70,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::post('project/{id}/editDescription', 'ProjectController@editDescription')->where('id', '[0-9]+');
         #Route::post('project/{id}/quitProject/', ['as' => 'project.quitProject', 'uses' => 'ProjectController@quitProject'])->where('id', '[0-9]+');
-        Route::post('project/{id}/removeFromProject/{user}', 'ProjectController@removeUserFromProject')->where('id', '[0-9]+');
+        Route::post('project/{id}/removeFromProject/{user}',  ['as' => 'memberships.quitProject', 'uses' => 'MembershipController@removeUserFromProject'])->where('id', '[0-9]+');
 
         /*-----------------------------Routes CheckList --------------------------*/
         Route::post('project/{id}/checklist/{CheckListId}/create','CheckListController@store');
@@ -81,16 +81,29 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('project/{id}/deleteScenario/{scenarioId}',['as' => 'scenario.delete', 'uses' => 'ScenarioController@delete']);
         Route::get('project/{id}/checkListItem/{itemId}/scenario/create','ScenarioController@addItem');
         Route::post('project/{id}/checkListItem/{itemId}/scenario/create','ScenarioController@store');
-        Route::post('project/{id}/scenario/{scenarioId}/create',['as'=>'scenario.create.item', 'uses' => 'ScenarioController@addStep']);
-        Route::put('project/{id}/scenario/{scenarioId}/item/{itemId}',['as'=>'scenario.item.modify', 'uses' => 'ScenarioController@updateStep']);
         Route::put('project/{id}/scenario/{scenarioId}',['as'=>'scenario.modify', 'uses' => 'ScenarioController@update']);
-        Route::get('project/{id}/scenario/{stepId}/delete',['as'=>'scenario.del.item', 'uses' => 'ScenarioController@delStep']);
+
         Route::post('project/{id}/scenario/{scenarioId}/uploadMaquete', ['as' => 'scenario.uploadMaquete', 'uses' => 'ScenarioController@uploadMaquete']);
-        Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario.changeMaquete', 'uses' => 'ScenarioController@changeMaquete']);
         Route::delete('project/{id}/scenario/{scenarioId}/delMaquete', ['as' => 'scenario.delMaquete', 'uses' => 'ScenarioController@delMaquete']);
+
+        // Route::post('project/{id}/scenario/{scenarioId}/create',['as'=>'scenario.create.item', 'uses' => 'ScenarioController@addStep']);
+        // Route::put('project/{id}/scenario/{scenarioId}/item/{itemId}',['as'=>'scenario.item.modify', 'uses' => 'ScenarioController@updateStep']);
+        // Route::get('project/{id}/scenario/{stepId}/delete',['as'=>'scenario.del.item', 'uses' => 'ScenarioController@delStep']);
+        //  Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario.changeMaquete', 'uses' => 'ScenarioController@changeMaquete']);
         /*--------------------- Routes objectifs -----------------------------*/
         Route::get('project/{id}/objective/{itemId}','ObjectiveController@showItem');
         Route::put('project/{id}/objective/{itemId}', 'ObjectiveController@update');
+
+        /* SCENARIOSTEP */
+        //Route::resource('scenario_steps', 'ScenarioStepController');
+        Route::post('project/{id}/scenario/{scenarioId}/create', ['as'=>'scenario_steps.create', 'uses' => 'ScenarioStepController@create']);
+        Route::post('project/{id}/scenario/{scenarioId}/item/{itemId}', ['as'=>'scenario_steps.modify', 'uses' => 'ScenarioStepController@update']);
+        Route::get('project/{id}/scenario/{stepId}/delete',['as'=>'scenario_steps.destroy', 'uses' => 'ScenarioStepController@destroy']);
+        Route::put('project/{id}/scenario/{scenarioId}/changeMaquete', ['as' => 'scenario_steps.changeMaquete', 'uses' => 'ScenarioStepController@changeMaquete']);
+
+
+       /* MOCKUP */
+       //  Route::get('project/{id}/mockups/', ['as' => 'mockups.show', 'uses' => 'MockupController@show'])->where('id', '[0-9]+');
 
 
         /* FILES */
@@ -107,9 +120,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('logout', ['as' => 'logout','uses' => 'SessionController@destroy']);
 
         /* Add User */
-        Route::get('project/{id}/getStudents/', 'ProjectController@getStudents')->where('id', '[0-9]+');
-        Route::get('project/{id}/getTeachers/', 'ProjectController@getTeachers')->where('id', '[0-9]+');
-        Route::post('project/{id}/addUsers/', ['as' => 'project.addUsers', 'uses' => 'ProjectController@addUsers'])->where('id', '[0-9]+');
+        Route::get('project/{id}/memberships/', ['as' => 'memberships.show', 'uses' => 'MembershipController@show'])->where('id', '[0-9]+');
+        Route::get('project/{id}/memberships/getStudents/', ['as' => 'memberships.getStudents', 'uses' => 'MembershipController@getStudents'])->where('id', '[0-9]+');
+        Route::get('project/{id}/memberships/getTeachers/', ['as' => 'memberships.getTeachers', 'uses' => 'MembershipController@getTeachers'])->where('id', '[0-9]+');
+        Route::post('project/{id}/memberships/', ['as' => 'memberships.add', 'uses' => 'MembershipController@addUsers'])->where('id', '[0-9]+');
 
         /* USER */
         Route::get('user/{user}', ['as'=> 'user.show','uses'=>'UserController@show'])->where('user', '[0-9]+');
