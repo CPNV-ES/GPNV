@@ -92,7 +92,7 @@
 
       @include('project.logbook')
 
-      @include('delivery.show')
+
 
       @include('project.file')
     </div>
