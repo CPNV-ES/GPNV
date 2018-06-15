@@ -91,16 +91,6 @@ class ScenarioController extends Controller
   }
 
   /**
-  * addNewItem form
-  * @param $projectId The current project id
-  * @param $scenarioId The current scenario id
-  * @return view to addNewItem form
-  */
-  function addItem($projectId, $checkListId){
-    return view("scenario.addItem", ['projectId'=>$projectId, 'checkListId'=>$checkListId]);
-  }
-
-  /**
   * Add a step to scenario
   * @param $projectId The current project id
   * @param $scenarioId The current scenario id

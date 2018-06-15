@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\CheckList;
+use App\Models\Scenario;
 use DB;
 
 
@@ -19,6 +20,39 @@ class ObjectiveController extends Controller
         $project = Project::find($projectID);
         $objectives = new CheckList('Project', $projectID, 'Objectifs');
         return view('objective/show',['project' => $project, 'objectifs'=>$objectives]);
+    }
+
+    /**
+     * show scenario for an objective
+     * @param $projectId The current project id
+     * @param $itemId The checkList item id
+     * @return view to see checkList item
+     * @with scenarios, projectId
+     */
+    function showItem($projectId, $itemId){
+        $item = CheckList::getItem($itemId);
+        //get scenarios linked to the item
+        $scenarios = Scenario::where('checkList_item_id', $item->id)->get(); //DB::table('scenarios')->where('checkList_item_id', $item->id)->get();
+        $scenarios->id = $itemId;
+        return view('objective.showItem')->with(compact('scenarios', 'projectId'));
+    }
+
+    /**
+     * update checkListItem
+     * @param $projectId The current project id
+     * @param $id The checkList item id
+     * @param $requete Define the request data send by POST
+     */
+    function update($id,$itemId, Request $requete){
+        if(null !== $requete->get('validate'))
+        {
+            CheckList::validate($itemId, $requete->get('done'));
+        }
+        else
+        {
+            CheckList::updateItem($itemId,$requete);
+        }
+        return redirect()->back();
     }
 
     /**
