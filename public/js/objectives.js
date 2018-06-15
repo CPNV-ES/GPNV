@@ -1,41 +1,83 @@
 /**
-* Show informations about abjectif in a modal
-*/
-$(document).on("click", '.showObjectif', function(event) {
-    var id = this.getAttribute('data-id');
-    var projectId = this.getAttribute('data-projectid');
-    var baseUrl = this.getAttribute('data-URL');
-    $.get(baseUrl+"/"+projectId+"/checkListItem/"+id, {}, function (form) {
-        bootbox.dialog({
-            message: form
-        });
-
-        /**
-        * Show modal to create a new scenarion on the objectif
-        */
-        $('.addScenario').click(function () {
-          var id = this.getAttribute('data-id');
-          var projectId = this.getAttribute('data-projectid');
-          var baseUrl = this.getAttribute('data-URL');
-          $.get(baseUrl+"/"+projectId+"/checkListItem/"+id+"/scenario/create", {}, function (form) {
-              bootbox.dialog({
-                  message: form,
-                    cancel: {
-                        label: 'Quitter',
-                        className: 'btn-danger'
-                    }
-              });
-          });
-        });
-    });
-  });
-
+ * Show informations about abjectif in a modal
+ */
 $(document).ready(function () {
-    $('.newObjective').click(function () {
-        $('.formNewObjective').removeClass("hidden")
+    var objectiveID;
+
+    $(".newObjective").click(function (e) {
+        e.preventDefault()
+
+        if ($('#name').val() != "") {
+            $('.msg-field-empty').addClass('hidden')
+            $.ajax({
+                url: $(this).parent('div').parent('form').attr('action'),
+                type: 'POST',
+                data: {name: $('#name').val()},
+                success: function (data) {
+                    var result = $('<div />').append(data).find('.objectivesData').html();
+                    $(".objectivesData").html(result);
+                    bootbox.hideAll();
+                }
+            });
+        }
+        else {
+            $('.msg-field-empty').removeClass('hidden')
+        }
     });
 
-    $('.cancelNewObjective').click(function () {
-        $('.formNewObjective').addClass("hidden")
+    $(document).on("click", 'a.removeObjective', function (event) {
+        var id = this.getAttribute('data-id');
+        var projectid = this.getAttribute('data-projectid');
+
+        bootbox.confirm("Voulez vous vraiment supprimer cet objectif ?", function (result) {
+            if (result) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "objective/" + id,
+                    success: function (data) {
+                        bootbox.alert("Objectif supprimé avec succès");
+                        $.ajax({
+                            url: "",
+                            type: 'get',
+                            success: function (data) {
+                                var result = $('<div />').append(data).find('.objectivesData').html();
+                                $(".objectivesData").html(result)
+                                bootbox.hideAll()
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    })
+
+    //Show dialog to create a new scenario for objective and show actuals
+    $(document).on("click", '.showObjectif', function (event) {
+        objectiveID = this.getAttribute('data-id');
+        $.get("objective/" + objectiveID, function (form) {
+            bootbox.dialog({
+                message: form
+            });
+        });
+    });
+
+    // Show the form to link a file or url to a deliverable
+    $('.updateObjective').click(function () {
+        //$('a.linkDelivery').click(function () {
+        $(this).closest('.checklist-item').css('max-height', '350px')
+        $('#' + objectiveID).addClass("hidden")
+        objectiveID = this.getAttribute('data-id');
+        $('#' + objectiveID).removeClass("hidden")
+    });
+
+    $('.reloadobjectives').click(function () {
+        $.ajax({
+            url: null,
+            type: 'get',
+            success: function (data) {
+                var result = $('<div />').append(data).find('.objectivesData').html();
+                $(".objectivesData").html(result)
+            }
+        });
     });
 })
