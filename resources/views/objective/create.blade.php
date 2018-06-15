@@ -1,17 +1,19 @@
 <!--
 Created By: Antonio Giordano
 Description: Form to add a new checkList
-Requirement: Link checkList, objective js
+Requirement: Link objective js
 -->
-<div class="formNewObjective" style="max-height: 35px;" >
-    <form class="form-horizontal" role="form" id="form" action="{{ URL('project') }}/{{$project->id}}/checklist/{{$objectifs->getId()}}/create">
+<div class="form-new-objective">
+    <form class="form-horizontal" role="form" id="form-objective" action="{{ URL('project') }}/{{$project->id}}/checklist/{{$objectifs->getId()}}/create">
         <div class="col-md-6">
             {{ csrf_field() }}
-            <input type="text" class="form-control" name="name" id="name" required>
-            <input type="hidden" name="description">
+            <input type="text" name="name" id="name" class="form-control" required>
+            <p class="text-danger msg-field-empty hidden"> Veuillez renseigner ce champ</p>
+            <span></span>
+            <input type="hidden" name="description" value="">
         </div>
         <div class="col-md-1">
-            <button type="button" class="newCheckList btn btn-primary" aria-hidden="true">Ajouter</button>
+            <button type="button" class="newObjective btn btn-primary" aria-hidden="true">Ajouter</button>
         </div>
     </form>
 </div>
