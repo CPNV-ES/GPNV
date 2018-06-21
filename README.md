@@ -63,7 +63,9 @@ Here is the link for the managing panel: https://apanel.swisscenter.com/login
 ### Deployment
 1. In your Laravel Project: `cap install`
 2. Add Public/Private key according to the file `CapDeploy`
-3. Then, everytime you need to deploy your applcation, just type `cap production deploy`
+3. Then, everytime you need to deploy your applcation:
+    1. Go on Swisscenter and activate the SSH access
+    2. Type in your project `cap production deploy`
 
 
 
