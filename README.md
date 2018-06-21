@@ -59,12 +59,13 @@ Here is the link for the managing panel: https://apanel.swisscenter.com/login
 ### Requirement
 - Ruby installed: `choco install ruby`
 - Capistrano installed: `gem install capistrano capistrano-laravel`
-- Add Public/Private key according to the file `CapDeploy`
+- Add Public/Private key according to the file `CapDeploy`in the config folder
 - The GPNV project is already capified, so you don't need to `cap install`
 ### Deployment
 Everytime you need to deploy your applcation:
 1. Go on Swisscenter and activate the SSH access
 2. Type in your project `cap production deploy`
+- If problem with version lock at "x.x.x", use `bundle exec cap production deploy` or go in `config/deploy.rb` and change the version to the one you use
 
 ## Credits
 Web developers :
