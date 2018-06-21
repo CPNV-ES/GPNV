@@ -59,13 +59,12 @@ Here is the link for the managing panel: https://apanel.swisscenter.com/login
 ### Requirement
 - Ruby installed: `choco install ruby`
 - Capistrano installed: `gem install capistrano capistrano-laravel`
-
+- Capify your Laravel projet (from your project folder): `cap install`
+- Add Public/Private key according to the file `CapDeploy`
 ### Deployment
-1. In your Laravel Project: `cap install`
-2. Add Public/Private key according to the file `CapDeploy`
-3. Then, everytime you need to deploy your applcation:
-    1. Go on Swisscenter and activate the SSH access
-    2. Type in your project `cap production deploy`
+Everytime you need to deploy your applcation:
+1. Go on Swisscenter and activate the SSH access
+2. Type in your project `cap production deploy`
 
 
 
