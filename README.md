@@ -51,7 +51,7 @@ After that, you can login in GPNV with your intranet account.
 If you want to use GPNV without SAML, in.env, you must define `USAGE=LOCAL`. The application will automatically log in with the first account in the database.
 
 ## Capistrano Deployment 
-> Note: make sure you have the credentials to access the different services, and there are the right credentials in the .env file (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, HOST_URL)
+> Note: make sure you have the credentials to access the different services, and the right credentials in the .env file (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, HOST_URL)
 
 The website is hosted on swisscenter center.
 Here is the link for the managing panel: https://apanel.swisscenter.com/login
