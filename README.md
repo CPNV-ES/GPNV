@@ -50,20 +50,22 @@ After that, you can login in GPNV with your intranet account.
 ### Local login
 If you want to use GPNV without SAML, in.env, you must define `USAGE=LOCAL`. The application will automatically log in with the first account in the database.
 
-## Deployment
-> Note: make sure you have the credentials to access the different services
+## Capistrano Deployment 
+> Note: make sure you have the credentials to access the different services, and there are the right credentials in the .env file (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, HOST_URL)
 
 The website is hosted on swisscenter center.
 Here is the link for the managing panel: https://apanel.swisscenter.com/login
 
-The web server does not have any cli, so a `composer install` or `composer update`
-to make sure that all the dependencies are installed.
-Once it's done, that the '.htaccess' file in root and 'public' folder have to
-be edited. The lines which start with 'php_value' must be remove.
+### Requirement
+- Ruby installed: `choco install ruby`
+- Capistrano installed: `gem install capistrano capistrano-laravel`
 
-Also make sure that the .env file has the right database credentials (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, HOST_URL)
+### Deployment
+1. In your Laravel Project: `cap install`
+2. Add Public key according to the file `CapDeploy`
+3. Then, everytime you need to deploy your applcation, just type `cap production deploy`
 
-When all those things are done, the website can be upload on the server by ftp.
+
 
 ## Credits
 Web developers :
