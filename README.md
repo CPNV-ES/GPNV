@@ -62,7 +62,7 @@ Here is the link for the managing panel: https://apanel.swisscenter.com/login
 
 ### Deployment
 1. In your Laravel Project: `cap install`
-2. Add Public key according to the file `CapDeploy`
+2. Add Public/Private key according to the file `CapDeploy`
 3. Then, everytime you need to deploy your applcation, just type `cap production deploy`
 
 
