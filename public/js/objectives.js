@@ -61,14 +61,6 @@ $(document).ready(function () {
         });
     });
 
-    // Show the form to link a file or url to a deliverable
-    $('.updateObjective').click(function () {
-        //$('a.linkDelivery').click(function () {
-        $(this).closest('.checklist-item').css('max-height', '350px')
-        $('#' + objectiveID).addClass("hidden")
-        objectiveID = this.getAttribute('data-id');
-        $('#' + objectiveID).removeClass("hidden")
-    });
 
     $('.reloadobjectives').click(function () {
         $.ajax({
@@ -80,4 +72,15 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(document).ajaxComplete(function () {
+        // Show the form to link a file or url to a deliverable
+        $('.updateObjective').click(function () {
+            //$('a.linkDelivery').click(function () {
+            $(this).closest('.checklist-item').css('max-height', '350px')
+            $('#' + objectiveID).addClass("hidden")
+            objectiveID = this.getAttribute('data-id');
+            $('#' + objectiveID).removeClass("hidden")
+        });
+    })
 })
