@@ -13,7 +13,7 @@
                 </div>
                 <div class="list-group">
                     <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.show') ? 'active' : '' }}">
-                        <h3><i class="fa fa-home"></i><br>Acceuil</h3>
+                        <h3><i class="fa fa-home"></i><br>Accueil</h3>
                     </a>
                     <a href="{{route('objective.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'objective.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-crosshairs"></i><br>Objectifs</h3>
