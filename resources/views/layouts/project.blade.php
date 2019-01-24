@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                 </div>
                 <div class="list-group">
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == 'project.show') ? 'active' : '' }}">
+                    <a href="{{route('project.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'project.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-home"></i><br>Accueil</h3>
                     </a>
                     <a href="{{route('objective.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'objective.show') ? 'active' : '' }}">

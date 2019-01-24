@@ -121,7 +121,7 @@ class ProjectController extends Controller
             }
         }
 
-        return view('project/show', [
+        return view('project/project', [
             'project' => $project,
             'livrables'=>$livrables,
             'objectifs'=>$objectifs,

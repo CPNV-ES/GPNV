@@ -105,6 +105,9 @@ Route::group(['middleware' => 'web'], function () {
        /* MOCKUP */
        //  Route::get('project/{id}/mockups/', ['as' => 'mockups.show', 'uses' => 'MockupController@show'])->where('id', '[0-9]+');
 
+        /* PROJECT HOME (accueil)*/
+        Route::get('project/{id}/project', ['as' => 'projectdata.show', 'uses' => 'ProjectController@show'])->where('id', '[0-9]+');
+
 
         /* FILES */
         Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store']);
