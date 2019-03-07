@@ -61,7 +61,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('project/{id}', ['as' => 'project.show', 'uses' => 'ProjectController@show' ])->where('id', '[0-9]+');
         Route::get('project/{id}/tasks/create', 'ProjectController@createTask')->where('id', '[0-9]+');
         Route::post('project/{id}/tasks', 'ProjectController@storeTask')->where('id', '[0-9]+');
-        Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'ProjectController@files']);
         Route::delete('project/{id}/users/{user}/destroy', 'ProjectController@destroyUser')->where('id', '[0-9]+');
         Route::post('project/{id}/target', ['as' => 'project.storetarget', 'uses' => 'ProjectController@storeTarget'])->where('projectid', '[0-9]+');
         Route::post('target/{target}/valide', ['as' => 'project.validetarget', 'uses' => 'ProjectController@valideTarget'])->where('target', '[0-9]+');
@@ -110,12 +109,9 @@ Route::group(['middleware' => 'web'], function () {
 
 
         /* FILES */
-        Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store']);
-        //Route::get('project/{id}/file', ['as' => 'files.show', 'uses' => 'FileController@show']);
-        Route::delete('project/{id}/file/{file}', ['as' => 'files.destroy', 'uses' => 'FileController@destroy']);
-        Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store'])->where('id', '[0-9]+');
-        Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'FileController@show'])->where('id', '[0-9]+');
+        Route::resource('project.files','FileController')->except(['update', 'edit']) ;
 
+        /* Link */
         Route::get('project/{id}/link/{check}', ['as' => 'deliverable.getToLink', 'uses' => 'DeliverableController@getToLink']);
         Route::post('project/{id}/link/{check}', ['as' => 'deliverable.link', 'uses' => 'DeliverableController@LinkTo']);
 

@@ -15,11 +15,12 @@ use App\Http\Requests;
 
 class FileController extends Controller
 {
+
     /**
     * Show file
     */
-    public function show($projectID){
-        $project = Project::find($projectID);
+    public function index($project){
+        $project = Project::find($project);
         return view('file/show',['project' => $project]);
     }
 
@@ -55,13 +56,12 @@ class FileController extends Controller
             $store->description = $request->input('description');
             $store->mime = $extension;
             $store->size = $file->getClientSize();
-            $store->description = $request->input('description');
             $store->url = $hash;
             $store->project_id = $id;
             $store->save();
         };
 
-        return redirect()->route("files.show", ['id'=>$id]);
+        return redirect()->route("project.files.index", ['id'=>$id]);
 
     }
 
