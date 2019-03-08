@@ -284,15 +284,6 @@ class ProjectController extends Controller
         return redirect()->route('project.index');
     }
 
-    /**
-    * Return te view to creating tasks
-    * @param $id The project id
-    * @return view of task creation
-    */
-    public function createTask($id){
-        $taskTypes = DB::table('taskTypes')->get();
-        return view('task.create', ['project' => $id, 'taskTypes' => $taskTypes]);
-    }
 
     /**
     * Edit a task
