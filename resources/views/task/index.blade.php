@@ -1,19 +1,14 @@
 @extends('layouts.project')
 
 @section('projectContent')
+
     <div class="container">
         <h1>{{$project->name}}</h1>
+        <a href="{{route('project.tasks.create',$project) }}" class="btn btn-primary editDescription">Créer une tâche</a>
         <div class="row">
-            @include('project.infos')
 
-            @include('project.membership')
 
-            <div class="col-xs-12 col-lg-6">
-                <div class="panel panel-default">
-                    <!-- Display all project informations like the members, a description and so on -->
-                    <div class="panel-heading showPanel" id="taskHeading" data-toggle="collapse" data-target="#projectTasks">
-                        <h1>T&acirc;ches <span class="glyphicon glyphicon-chevron-down pull-right"></span></h1>
-                    </div>
+
                     <div id="projectTasks" class="panel-body projectTasks collapse" data-projectid="{{$project->id}}">
                         <div id="filters" class="col-md-12">
                             <div class="awesomeCheckbox awesomeCheckbox-primary filterCheckboxes">
@@ -88,15 +83,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            @include('project.logbook')
 
 
-
-            @include('project.file')
         </div>
-    </div>
     @push('scripts')
         <script src="{{ URL::asset('js/tasks.js') }}"></script>
         <script src="{{ URL::asset('js/app.js') }}"></script>

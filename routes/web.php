@@ -33,14 +33,10 @@ Route::group(['middleware' => 'web'], function () {
         });
 
         /* TASK */
-        Route::resource('tasks', 'TaskController',
-            ['parameters' =>
-                ['tasks' => 'task']
-            ]
-        );
+        Route::resource('project.tasks', 'TaskController');
 
         Route::delete('deliverable/unlink/{checkList_id}/', ['as' => 'deliverable.unlink', 'uses' => 'CheckListController@unlink']);
-
+/*
         Route::get('tasks/{task}/',['as' => 'tasks.show','uses' => 'TaskController@show'])->where('task', '[0-9]+');
         Route::get('tasks/{task}/children/create', ['as' => 'tasks.createChildren','uses' => 'TaskController@createChildren'])->where('task', '[0-9]+');
         Route::post('tasks/{task}/children/', ['as' => 'tasks.storeChildren','uses' => 'TaskController@storeChildren'])->where('task', '[0-9]+');
@@ -51,15 +47,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::delete('tasks/{usersTask}/users/', ['as' => 'tasks.userTaskDelete', 'uses' => 'TaskController@userTaskDelete'])->where('usersTask', '[0-9]+');
         Route::post('tasks/{durationsTask}/stop', ['as' => 'tasks.stop', 'uses' => 'TaskController@stop'])->where('durationsTask', '[0-9]+');
         Route::post('tasks/{task}', 'TaskController@store')->where('task', '[0-9]+');
-
+*/
         /* PROJECT */
-        Route::resource('project','ProjectController',
-            ['parameters' => ['project' => 'id']],
-            ['only' => ['index']]
-        );
+        Route::resource('project','ProjectController');
         Route::get('/', ['as' => 'home', 'uses' => 'ProjectController@index' ]);
         Route::get('project/{id}', ['as' => 'project.show', 'uses' => 'ProjectController@show' ])->where('id', '[0-9]+');
-        Route::get('project/{id}/tasks/create', 'ProjectController@createTask')->where('id', '[0-9]+');
         Route::post('project/{id}/tasks', 'ProjectController@storeTask')->where('id', '[0-9]+');
         Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'ProjectController@files']);
         Route::delete('project/{id}/users/{user}/destroy', 'ProjectController@destroyUser')->where('id', '[0-9]+');

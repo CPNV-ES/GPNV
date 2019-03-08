@@ -10,21 +10,91 @@ use Illuminate\Support\Facades\Auth;
 use DateTime;
 use App\Models\User;
 use DB;
+use App\Models\Project;
+use App\Models\Event;
 use App\Models\Status;
-
-
+use App\Models\CheckList;
 use App\Http\Requests;
 
 class TaskController extends Controller
 {
     /**
-    * Return the view task
-    * @param $task The task object
-    * @return view to see whole project
-    */
-    function show(Task $task){
-        $actualTaskType = DB::table('taskTypes')->where('id',$task->type_id)->first();
-        return view('task.show', ['task' => $task, "actualTaskType" => $actualTaskType]);
+     * Return the view task
+     * @param Project $project
+     * @return view to see whole project
+     */
+    function index(Project $project)
+    {
+        $currentUser = Auth::user();
+        $userTasks = UsersTask::where("user_id", "=", $currentUser->id)->get();
+        $duration = null;
+        $task = null;
+        $request="";
+        foreach ($userTasks as $userstask) {
+            foreach ($userstask->durationsTasks()->get() as $durationtask) {
+                if ($durationtask->ended_at == null) {
+                    $duration = $durationtask->id;
+                    $task = $userstask->task_id;
+                }
+            }
+        }
+
+        /* Created By Fabio Marques
+          Description: create a new checkListObject
+        */
+        $livrables = new CheckList('Project', $project->id, 'Livrables');
+        /* Created By Fabio Marques
+          Description: create a new objectifs checkList
+        */
+        $objectifs = new CheckList('Project', $project->id, 'Objectifs', 'project/scenario');
+
+        /* Created By Raphaël B.
+          Description: log book event handling
+        */
+        $events = Event::where('project_id', '=', $project->id)
+            ->orderBy('created_at', 'desc')->get();
+
+        $projectMembers = $project->users->sortBy('id');
+
+        $badgeCount = 0;
+
+        // Array containing lists of users that have validated events
+        $validations = array();
+
+        foreach ($events as $event) {
+            // Holds ids of users that have validated the event
+            $users = array();
+            foreach ($projectMembers as $member) {
+                $exists = AcknowledgedEvent::where([
+                    ['user_id', '=', $member->id],
+                    ['event_id', '=', $event->id],
+                ])->exists();
+
+                if($exists) {
+                    $users[] = $member->id;
+                }
+            }
+
+            $validations[$event->id] = $users;
+
+            // Incrementing badgeCount unless the current user validated the event
+            if (!in_array($currentUser->id, $users)) {
+                $badgeCount++;
+            }
+        }
+
+        return view('task.index', [
+            'project' => $project,
+            'livrables'=>$livrables,
+            'objectifs'=>$objectifs,
+            'duration' => $duration,
+            'taskactive' => $task,
+            'currentUser' => $currentUser,
+            'members' => $projectMembers,
+            'events' => $events,
+            'validations' => $validations,
+            'badgeCount' => $badgeCount
+        ]);
     }
 
     /**
