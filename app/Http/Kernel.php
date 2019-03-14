@@ -29,6 +29,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
         'api' => [
@@ -52,5 +53,6 @@ class Kernel extends HttpKernel
         'Ip' => \App\Http\Middleware\Ip::class,
         'ProjectControl' => \App\Http\Middleware\ProjectControl::class,
         'samlauth' => \App\Http\Middleware\SamlAuth::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ];
 }
