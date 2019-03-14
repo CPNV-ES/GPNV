@@ -21,9 +21,8 @@ class UserController extends Controller
     * @param $request Define the request data send by POST
     * @return view to see user
     */
-    public function show(User $user, Request $request)
-    {
-        return view('user.show', ['user' => $user]);
+    public function show(User $user) {
+        return view('user.show', compact('user'));//['user' => $user]);
     }
 
     // Recover and spend the avatar

@@ -130,7 +130,7 @@ Route::group(['middleware' => 'web'], function () {
 
         /* USER */
         Route::resource('user', 'UserController');
-        Route::post('user/{user}/avatar',['as'=> 'users.avatar','uses'=>'UserController@storeAvatar']);
+        Route::post('user/{user}/avatar',['as'=> 'user.avatar','uses'=>'UserController@storeAvatar']);
 
         /* PLANNING */
         Route::get('project/{projectid}/planning', 'PlanningController@show')->where('projectid', '[0-9]+');
