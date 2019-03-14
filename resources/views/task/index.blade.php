@@ -3,13 +3,13 @@
 @section('projectContent')
 
     <div class="container">
-        <h1>{{$project->name}}</h1>
-        <a href="{{route('project.tasks.create',$project) }}" class="btn btn-primary editDescription">Créer une tâche</a>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Tâches</h1>
+        </div>
+
         <div class="row">
-
-
-
-                    <div id="projectTasks" class="panel-body projectTasks collapse" data-projectid="{{$project->id}}">
+                    <div id="projectTasks" class="panel-body projectTasks" data-projectid="{{$project->id}}">
                         <div id="filters" class="col-md-12">
                             <div class="awesomeCheckbox awesomeCheckbox-primary filterCheckboxes">
                                 <span class="instruction">Afficher les tâches</span>
@@ -78,13 +78,13 @@
                                 </ul>
                             </div>
                             @if(Auth::user()->projects()->find($project->id))
-                                <a class="btn btn-primary taskroot" data-id="{{$project->id}}">Créer une tâche</a>
+                                <a href="{{route('project.tasks.create',['projectID' => $project->id] ) }}" class="btn btn-primary editDescription">Créer une tâche</a>
                             @endif
                         </div>
                     </div>
                 </div>
 
-
+    </div>
         </div>
     @push('scripts')
         <script src="{{ URL::asset('js/tasks.js') }}"></script>

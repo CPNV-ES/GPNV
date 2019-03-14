@@ -14,7 +14,10 @@ use App\Models\Project;
 use App\Models\Event;
 use App\Models\Status;
 use App\Models\CheckList;
+use App\Models\TaskType;
 use App\Http\Requests;
+use App\Models\AcknowledgedEvent;
+use Prophecy\Doubler\ClassPatch\KeywordPatch;
 
 class TaskController extends Controller
 {
@@ -23,10 +26,12 @@ class TaskController extends Controller
      * @param Project $project
      * @return view to see whole project
      */
-    function index(Project $project)
+
+    function index($projectID)
     {
+        $project = Project::find($projectID);
         $currentUser = Auth::user();
-        $userTasks = UsersTask::where("user_id", "=", $currentUser->id)->get();
+        $userTasks = UsersTask::where("user_id", $currentUser->id)->get();
         $duration = null;
         $task = null;
         $request="";
@@ -42,6 +47,7 @@ class TaskController extends Controller
         /* Created By Fabio Marques
           Description: create a new checkListObject
         */
+
         $livrables = new CheckList('Project', $project->id, 'Livrables');
         /* Created By Fabio Marques
           Description: create a new objectifs checkList
@@ -55,7 +61,6 @@ class TaskController extends Controller
             ->orderBy('created_at', 'desc')->get();
 
         $projectMembers = $project->users->sortBy('id');
-
         $badgeCount = 0;
 
         // Array containing lists of users that have validated events
@@ -111,8 +116,10 @@ class TaskController extends Controller
     * @param $task The task object
     * @return view to create a root task
     */
-    function create(Task $task, Request $request)  {
-        return view('task.create', ['task' => $task]);
+    function create($projectID)  {
+        $project = Project::find($projectID);
+        $taskTypes = TaskType::all();
+        return view('task.create', ['project' => $project,'taskTypes' => $taskTypes]);
     }
 
     /**
