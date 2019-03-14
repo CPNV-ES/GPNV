@@ -129,8 +129,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('project/{id}/memberships/', ['as' => 'memberships.add', 'uses' => 'MembershipController@addUsers'])->where('id', '[0-9]+');
 
         /* USER */
-        Route::get('user/{user}', ['as'=> 'user.show','uses'=>'UserController@show'])->where('user', '[0-9]+');
-        Route::post('user/{user}/avatar',['as'=> 'user.avatar','uses'=>'UserController@storeAvatar']);
+        Route::resource('user', 'UserController');
+        Route::post('user/{user}/avatar',['as'=> 'users.avatar','uses'=>'UserController@storeAvatar']);
 
         /* PLANNING */
         Route::get('project/{projectid}/planning', 'PlanningController@show')->where('projectid', '[0-9]+');
@@ -148,9 +148,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('project/{id}/formEvents', ['as' => 'project.formEvents', 'uses' => 'EventController@formEvent'])->where('id', '[0-9]+');
         Route::post('project/{id}/events', ['as' => 'project.storeEvents', 'uses' => 'EventController@store'])->where('id', '[0-9]+');
         Route::post('project/{id}/events/validation', ['as' => 'project.storeEventsValidation', 'uses' => 'EventController@storeValidation'])->where('id', '[0-9]+');
-
-        Route::get('test','Welcome@test');
-        Route::get('user/{search}',array('as' => 'name', 'uses' => 'UserController@search'));
 
         /* RELOAD ROUTES */
         Route::get('project/{id}/deliverables', ['as' => 'deliverable.show', 'uses' => 'DeliverableController@show']);
