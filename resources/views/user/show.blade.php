@@ -5,15 +5,15 @@
         <div class="panel panel-default">
             <div class="panel-heading"><h3>{{$user->id}} - {{$user->fullname}}</h3></div><!-- Display user fullname -->
             <div class="panel-body">
-                <img style="width: 80px; border-radius : 50%;" src="../avatar/{{$user->avatar}}" \>
+                <img style="margin: 5px; width: 80px; border-radius : 50%;" src="../avatar/{{$user->avatar}}" \>
+                @if ($user->id === Auth::user()->id)
                 <form enctype="multipart/form-data" action="{{route('user.avatar',Auth::user()->id)}}" method="post">
                     {!! csrf_field() !!}
 
-                    <div class="panel-heading">
-                    Votre Avatar</div>
                     <input type="file" name="avatar">
                     <input type="submit" value="Envoyer">
                 </form>
+                @endif
             </div>
         </div>
         <div class="panel panel-default">
