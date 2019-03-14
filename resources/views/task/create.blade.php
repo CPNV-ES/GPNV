@@ -28,11 +28,12 @@
         });
     </script>
 
-    <form class="form-horizontal" role="form" method="POST" id="createTaskForm" action="{{ route('project.tasks.create') }}">
+    <form class="form-horizontal" role="form" method="POST" id="createTaskForm" action="">
         {!! csrf_field() !!}
         <?php
         use App\Models\CheckList;
-        $objectifs = new CheckList('Project', $project, 'Objectifs', 'project/scenario');
+        $objectifs = new CheckList('Project', $project->id, 'Objectifs', 'project/scenario');
+
         ?>
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
