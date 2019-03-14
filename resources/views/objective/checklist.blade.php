@@ -2,6 +2,7 @@
   Created By: Fabio Marques
   Description: View to show each item of the checkList
 -->
+
 <div class="well well-sm checklist-item">
     <div class="media">
         <div class="media-body">
