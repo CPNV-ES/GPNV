@@ -25,7 +25,6 @@ class UserController extends Controller
         return view('user.show', compact('user'));//['user' => $user]);
     }
 
-    // Recover and spend the avatar
     public function storeAvatar(User $user, Request $request)
     {
         $file = Input::file('avatar');
