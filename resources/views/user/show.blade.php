@@ -14,6 +14,16 @@
                     <input style="margin: 5px" type="submit" value="Envoyer">
                 </form>
                 @endif
+                
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="panel panel-default">

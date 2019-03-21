@@ -32,23 +32,16 @@ class UserController extends Controller
         $destinationPath = 'avatar/';
 
         $fileArray = array('image' => $file);
+        
+        $validatedData = $request->validate([
+            'avatar' => 'mimes:jpeg,jpg,png,gif|required|max:10000'
+        ]);
 
-        // Define the extension accepted and the max size
-        $rules = array(
-            'image' => 'mimes:jpeg,jpg,png,gif|required|max:10000'
-        );
+        $extension = $file->getClientOriginalExtension();
+        $fileName = md5(date('YmdHis') . rand(11111, 99999)) . '.' . $extension;
+        $file->move($destinationPath, $fileName);
+        $user->update(['avatar' => $fileName]);
 
-        $validator = Validator::make($fileArray, $rules);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->getMessages()], 400);
-        } else { // Add the avatar
-            $extension = $file->getClientOriginalExtension();
-            $fileName = md5(date('YmdHis') . rand(11111, 99999)) . '.' . $extension;
-            $file->move($destinationPath, $fileName);
-            $user->update(['avatar' => $fileName]);
-        };
-
-        return redirect()->route("user.show", compact('users'));
+        return redirect()->route("user.show", compact('user'));
     }
 }
