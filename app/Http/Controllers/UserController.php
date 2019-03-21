@@ -22,7 +22,7 @@ class UserController extends Controller
     * @return view to see user
     */
     public function show(User $user) {
-        return view('user.show', compact('user'));//['user' => $user]);
+        return view('user.show', compact('user'));
     }
 
     public function storeAvatar(User $user, Request $request)
@@ -49,17 +49,6 @@ class UserController extends Controller
             $user->update(['avatar' => $fileName]);
         };
 
-        return redirect()->route("user.show", ['id' => Auth::user()->id]);
-    }
-
-    public function search($name)
-    {
-      if(isset($name)) {
-      $users = array('users_listing' => User::search($name));
-      return $users;
-      }
-      else {
-        return "no results";
-      }
+        return redirect()->route("user.show", compact('users'));
     }
 }
