@@ -24,12 +24,19 @@
                           <label class="col-md-4 control-label">Le fichier</label>
 
                           <div class="col-md-6">
-                              <input type="file" name="file">
+                              <input type="file" name="file" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple="">
+                              <label for="file-1"><span class="fileselector">Choose File</span> </label>
                           </div>
 
                           <div class="col-md-6">
-                              <input type="submit" value="Envoyer">
+                              <button type="submit" class="btn btn-primary" value="Envoyer" aria-hidden="true">Upload</button>
                           </div>
+
+                          @if ($errors->has('file'))
+                              <div class="alert alert-danger col-md-3" role="alert">
+                                  {{ $errors->first('file') }}
+                              </div>
+                          @endif
 
                           </form>
                       </div>
@@ -38,18 +45,26 @@
 
               <div class="panel-heading">Fichiers du projet</div>
               <div class="panel-body">
-                  <div class="container files">
+
+                  <div class="container files dynamic-layout">
                       @foreach($project->files as $file)
                           <div class="file">
                               <a href="{{asset('files/'.$project->id.'/'.$file->url)}}" download="{{$file->name}}">
-                              <img class="" src="{{asset('files/'.$project->id.'/'.$file->url)}}">
+                              @if(\Illuminate\Support\Str::startsWith($file->mime, 'image/'))
+                                  <img class="" src="{{asset('files/'.$project->id.'/'.$file->url)}}">
+                              @endif
                               <p>{{$file->name}}</p>
                               <p>{{$file->description}}</p>
                               <p>{{round($file->size / (1024*1024), 2)}} MB</p>
                               </a>
-                              <button class="right btn filedestroy" data-project="{{$project->id}}"
-                              data-id="{{$file->id}}">
-                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                              {{ method_field('DELETE') }}
+                              {{ csrf_field() }}
+                              {{ Form::open([
+                                  'method' => 'DELETE',
+                                  'route' => ['project.files.destroy', $project->id , $file->id]
+                              ]) }}
+                              {{ Form::submit('X', ['class' => 'btn btn-danger'])}}
+                              {{ Form::close() }}
                           </div>
                       @endforeach
                   </div>
