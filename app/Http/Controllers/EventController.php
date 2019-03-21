@@ -64,13 +64,14 @@ class EventController extends Controller
             }
         }
 
-        return json_encode(array(
+        $data = json_encode(array(
             'eventInfos'=>$eventInfos,
             'currentUser'=>['id'=>$currentUserId],
             'validations' => $validations,
             'members' => $projectMembers,
             'badgeCount' => $badgeCount
         ));
+        return view('project/event', ['id' => $project->id, 'data' => $data]);
     }
 
     /**
