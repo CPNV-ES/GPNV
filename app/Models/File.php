@@ -20,10 +20,4 @@ class File extends Model {
     public function checkList() {
         return $this->belongsTo(\App\Models\CheckList::class, 'checkListItem_id', 'checkListItem_id');
     }
-
-
-    public function delete(){
-
-    }
-
 }

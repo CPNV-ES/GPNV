@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+<div class="container">
+    @if(Session::has('flash_message'))
+        <div class="alert alert-success" style="position: absolute; z-index: 2;">
+            <strong>Success!</strong> {{ Session::get('flash_message') }}
+        </div>
+    @endif
+
+    @yield('content')
+</div>
+
+
 @section('content')
 `
     <div class="projectContainer">
