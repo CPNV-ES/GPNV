@@ -53,7 +53,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/', ['as' => 'home', 'uses' => 'ProjectController@index' ]);
         Route::get('project/{id}', ['as' => 'project.show', 'uses' => 'ProjectController@show' ])->where('id', '[0-9]+');
         Route::post('project/{id}/tasks', 'ProjectController@storeTask')->where('id', '[0-9]+');
-        Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'ProjectController@files']);
         Route::delete('project/{id}/users/{user}/destroy', 'ProjectController@destroyUser')->where('id', '[0-9]+');
         Route::post('project/{id}/target', ['as' => 'project.storetarget', 'uses' => 'ProjectController@storeTarget'])->where('projectid', '[0-9]+');
         Route::post('target/{target}/valide', ['as' => 'project.validetarget', 'uses' => 'ProjectController@valideTarget'])->where('target', '[0-9]+');
@@ -102,12 +101,9 @@ Route::group(['middleware' => 'web'], function () {
 
 
         /* FILES */
-        Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store']);
-        //Route::get('project/{id}/file', ['as' => 'files.show', 'uses' => 'FileController@show']);
-        Route::delete('project/{id}/file/{file}', ['as' => 'files.destroy', 'uses' => 'FileController@destroy']);
-        Route::post('project/{id}/file', ['as' => 'files.store', 'uses' => 'FileController@store'])->where('id', '[0-9]+');
-        Route::get('project/{id}/files', ['as' => 'files.show', 'uses' => 'FileController@show'])->where('id', '[0-9]+');
+        Route::resource('project.files','FileController')->except(['update', 'edit']) ;
 
+        /* Link */
         Route::get('project/{id}/link/{check}', ['as' => 'deliverable.getToLink', 'uses' => 'DeliverableController@getToLink']);
         Route::post('project/{id}/link/{check}', ['as' => 'deliverable.link', 'uses' => 'DeliverableController@LinkTo']);
 
@@ -121,7 +117,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('project/{id}/memberships/', ['as' => 'memberships.add', 'uses' => 'MembershipController@addUsers'])->where('id', '[0-9]+');
 
         /* USER */
-        Route::get('user/{user}', ['as'=> 'user.show','uses'=>'UserController@show'])->where('user', '[0-9]+');
+        Route::resource('user', 'UserController');
         Route::post('user/{user}/avatar',['as'=> 'user.avatar','uses'=>'UserController@storeAvatar']);
 
         /* PLANNING */
@@ -139,9 +135,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('project.events', 'EventController');
         Route::get('project/{id}/formEvents', ['as' => 'project.formEvents', 'uses' => 'EventController@formEvent'])->where('id', '[0-9]+');
         Route::post('project/{id}/event/validation', ['as' => 'project.storeEventsValidation', 'uses' => 'EventController@storeValidation'])->where('id', '[0-9]+');
-
-        Route::get('test','Welcome@test');
-        Route::get('user/{search}',array('as' => 'name', 'uses' => 'UserController@search'));
 
         /* RELOAD ROUTES */
         Route::get('project/{id}/deliverables', ['as' => 'deliverable.show', 'uses' => 'DeliverableController@show']);
