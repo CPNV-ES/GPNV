@@ -132,10 +132,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('project/{id}/search', ['as' => 'search.store', 'uses' => 'SearchController@store']);
 
         /* EVENTS */
-        Route::get('project/{id}/events', ['as' => 'project.events', 'uses' => 'EventController@show'])->where('id', '[0-9]+');
+        Route::resource('project.events', 'EventController');
         Route::get('project/{id}/formEvents', ['as' => 'project.formEvents', 'uses' => 'EventController@formEvent'])->where('id', '[0-9]+');
-        Route::post('project/{id}/events', ['as' => 'project.storeEvents', 'uses' => 'EventController@store'])->where('id', '[0-9]+');
-        Route::post('project/{id}/events/validation', ['as' => 'project.storeEventsValidation', 'uses' => 'EventController@storeValidation'])->where('id', '[0-9]+');
+        Route::post('project/{id}/event/validation', ['as' => 'project.storeEventsValidation', 'uses' => 'EventController@storeValidation'])->where('id', '[0-9]+');
 
         /* RELOAD ROUTES */
         Route::get('project/{id}/deliverables', ['as' => 'deliverable.show', 'uses' => 'DeliverableController@show']);
