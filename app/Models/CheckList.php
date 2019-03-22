@@ -10,7 +10,7 @@ use DB;
 class CheckList extends Model
 {
   private $items=[];
-  private $nbItems=0;
+  private $nbItems=-1;
   private $nbDone=0;
   private $checkListId="";
   private $name="";
