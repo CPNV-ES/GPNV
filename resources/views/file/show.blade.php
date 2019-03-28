@@ -52,6 +52,8 @@
                               <a href="{{asset('files/'.$project->id.'/'.$file->url)}}" download="{{$file->name}}">
                               @if(\Illuminate\Support\Str::startsWith($file->mime, 'image/'))
                                   <img class="" src="{{asset('files/'.$project->id.'/'.$file->url)}}">
+                              @else
+                                  <h1><i class="fa fa-file-text-o"></i></h1>
                               @endif
                               <p>{{$file->name}}</p>
                               <p>{{$file->description}}</p>
