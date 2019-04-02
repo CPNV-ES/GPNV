@@ -181,7 +181,7 @@ class TaskController extends Controller
     * @param $task The task object
     * @param $request Define the request data send by POST
     */
-    function store(Task $task, Request $request){
+    function store(Task $task, Request $request, Project $project){
         $transactionResult = $task->update([
             'name' => $request->input('name'),
             'duration' => $request->input('duration'),
@@ -191,9 +191,19 @@ class TaskController extends Controller
             'status_id' => $request->input('status')
         ]);
 
+        $newTask = new Task;
+
+        $newTask->name = $request->input('name');
+        $newTask->project_id = $project->id;
+        $newTask->duration = $request->input('duration');
+        $newTask->parent_id = null; //$request->input('parent_id');
+        $newTask->type_id = $request->input('taskTypes');
+        $newTask->status_id = $request->input('status');
+        $newTask->save();
+
         //(new EventController())->store($request->input('project_id'), "Créer une tâche enfant"); // Create an event
 
-        // return redirect()->route("project.show", ['id'=>$task->project_id]);
+        return redirect()->route("project.tasks.index", $project);
         // return json_encode($transactionResult);
     }
 

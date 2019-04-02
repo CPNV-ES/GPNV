@@ -28,7 +28,7 @@
         });
     </script>
 
-    <form class="form-horizontal" role="form" method="POST" id="createTaskForm" action="">
+    <form class="form-horizontal" role="form" method="POST" id="createTaskForm" action="{{route('project.tasks.store', $project->id)}}">
         {!! csrf_field() !!}
         <?php
         use App\Models\CheckList;
