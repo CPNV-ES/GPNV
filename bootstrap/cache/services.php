@@ -24,14 +24,15 @@
     20 => 'Illuminate\\View\\ViewServiceProvider',
     21 => 'Aacotroneo\\Saml2\\Saml2ServiceProvider',
     22 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    23 => 'Collective\\Html\\HtmlServiceProvider',
+    23 => 'Laravel\\Tinker\\TinkerServiceProvider',
     24 => 'Collective\\Html\\HtmlServiceProvider',
-    25 => 'App\\Providers\\AppServiceProvider',
-    26 => 'App\\Providers\\AuthServiceProvider',
-    27 => 'App\\Providers\\EventServiceProvider',
-    28 => 'App\\Providers\\RouteServiceProvider',
-    29 => 'Mortimer\\Rootrelativeurls\\RootrelativeurlsServiceProvider',
-    30 => 'Mortimer\\HeaderTokenGuard\\ServiceProvider',
+    25 => 'Collective\\Html\\HtmlServiceProvider',
+    26 => 'App\\Providers\\AppServiceProvider',
+    27 => 'App\\Providers\\AuthServiceProvider',
+    28 => 'App\\Providers\\EventServiceProvider',
+    29 => 'App\\Providers\\RouteServiceProvider',
+    30 => 'Mortimer\\Rootrelativeurls\\RootrelativeurlsServiceProvider',
+    31 => 'Mortimer\\HeaderTokenGuard\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -151,6 +152,7 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
@@ -192,6 +194,9 @@
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
     'Collective\\Html\\HtmlServiceProvider' => 

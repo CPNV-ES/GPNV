@@ -4,8 +4,8 @@
   <div class="scenario">
     <div class="row">
       <div class="col-xs-12">
-        <a href="{{route('project.show', $projectId)}}" class="btn btn-primary btn-retour">
-          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour au projet
+        <a href="{{route('objective.show', $projectId)}}" class="btn btn-primary btn-retour">
+          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour au objectifs
         </a>
       </div>
     </div>
@@ -27,8 +27,8 @@
           <p id="projectDescriptionP">{{ $scenario->description }}</p>
         </div>
         <div class="form-group">
-          <input id="slideValidated" disabled @if($scenario->actif == 1) checked @endif name="actif" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Validé" data-off="Non Validé">
-          <input id="slideTested" disabled @if($scenario->test_validated == 1) checked @endif name="test_validated" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Testé et Validé" data-off="Pas testé">
+          <input id="slideValidated"  @if($scenario->actif == 1) checked @endif name="actif" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Validé" data-off="Non Validé">
+          <input id="slideTested"  @if($scenario->test_validated == 1) checked @endif name="test_validated" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Testé et Validé" data-off="Pas testé">
           <button id="saveDescription" class="btn btn-success pull-right hidden" onclick="saveDescription">Enregistrer</button>
           <button id="modifyDescription" class="btn btn-warning pull-right" type="button">Modifier</button>
           <button id="cancelDescription" class="btn btn-danger pull-right hidden" type="button" onclick="cancelDescription">Annuler</button>

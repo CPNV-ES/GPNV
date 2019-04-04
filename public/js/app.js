@@ -212,7 +212,7 @@ $(document).ready(function () {
 
     function callEvents(project) {
         $.ajax({
-            url: "{{ route('project.events', '@') }}".replace('@', project),
+            url: "{{ route('project.event', '@') }}".replace('@', project),
             type: 'get',
             dataType: 'json',
             success: function (data) {
