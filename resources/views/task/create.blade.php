@@ -28,7 +28,7 @@
         });
     </script>
 
-    <form class="form-horizontal" role="form" method="POST" id="createTaskForm" action="">
+    <form class="form-horizontal" role="form" method="POST" id="createTaskForm" action="{{route('project.tasks.store', $project->id)}}">
         {!! csrf_field() !!}
         <?php
         use App\Models\CheckList;
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-4 control-label">Statut</label>
+            <label class="col-md-4 control-label">Status</label>
 
             <div class="col-md-6 statusContainer">
                 <?php

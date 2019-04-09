@@ -181,7 +181,7 @@ class TaskController extends Controller
     * @param $task The task object
     * @param $request Define the request data send by POST
     */
-    function store(Task $task, Request $request){
+    function store(Task $task, Request $request, Project $project){
         $transactionResult = $task->update([
             'name' => $request->input('name'),
             'duration' => $request->input('duration'),
@@ -191,10 +191,19 @@ class TaskController extends Controller
             'status_id' => $request->input('status')
         ]);
 
+        $newTask = new Task;
+
+        $newTask->name = $request->input('name');
+        $newTask->project_id = $project->id;
+        $newTask->duration = $request->input('duration');
+        $newTask->parent_id = $request->input("parent_id");
+        $newTask->type_id = $request->input('taskTypes');
+        $newTask->status_id = $request->input('status');
+        $newTask->save();
+
         //(new EventController())->store($request->input('project_id'), "Créer une tâche enfant"); // Create an event
 
-        // return redirect()->route("project.show", ['id'=>$task->project_id]);
-        // return json_encode($transactionResult);
+        return redirect()->route("project.tasks.index", $project);
     }
 
     /**
@@ -308,4 +317,80 @@ class TaskController extends Controller
         }
     }
 
+    /**
+    * Returns the html representation of all views mathing a set of filter
+    * specified in the request parameter
+    * @param $request Define the request data send by POST
+    * @return tasks
+    */
+    public function getTasks(Request $request) {
+        $projectId = $request->id;
+        $status = $request->status;
+        $taskOwner = $request->taskOwner;
+        $taskObjective = $request->taskObjective;
+
+        // Stores the task views representations that will be displayed to the user
+        $viewStack = "";
+
+        // Holds tasks matching the search criterias/filters
+        $tasks = collect(new Task);
+
+        switch ($taskOwner) {
+            case 'all':
+                $query = Task::join('users_tasks', 'tasks.id', '=', 'users_tasks.task_id')
+                    ->select('tasks.*')
+                    ->where("tasks.project_id", "=", $projectId)
+                    ->when(count($status) > 0, function ($query) use ($status) {
+                        return $query->whereIn("tasks.status_id", $status);
+                    })
+                    ->distinct()
+                    ->whereNull('tasks.parent_id');
+                if(isset($taskObjective) && $taskObjective!='all')
+                  $query->where('tasks.Objective_id','=', $taskObjective);
+                $tasks = $query->get();
+                break;
+
+            case 'nobody':
+                $query = Task::doesntHave('usersTasks')
+                    ->where("tasks.project_id", "=", $projectId)
+                    ->when(count($status) > 0, function ($query) use ($status) {
+                        return $query->whereIn("tasks.status_id", $status);
+                    })
+                    ->whereNull('tasks.parent_id');
+
+                if(isset($taskObjective) && $taskObjective!='all')
+                  $query->where('tasks.Objective_id','=', $taskObjective);
+
+                $tasks = $query->get();
+                break;
+
+            default:
+                $query = Task::join('users_tasks', 'tasks.id', '=', 'users_tasks.task_id')
+                    ->select('tasks.*')
+                    ->where('users_tasks.user_id', "=", $taskOwner)
+                    ->where("tasks.project_id", "=", $projectId)
+                    ->when(count($status) > 0, function ($query) use ($status) {
+                        return $query->whereIn("tasks.status_id", $status);
+                    })
+                    ->whereNull('tasks.parent_id');
+
+                if(isset($taskObjective) && $taskObjective!='all')
+                  $query->where('tasks.Objective_id','=', $taskObjective);
+
+                $tasks = $query->get();
+                break;
+        }
+
+        // Making sure there are tasks to display / show a message otherwise
+
+        if (count($tasks) > 0) {
+            foreach ($tasks as $task) {
+                $taskView = view('project/task', ['task' => $task]);
+                $viewStack .= $taskView;
+            }
+            return $viewStack;
+        } else {
+            return "<p id=\"resultLess\">Aucune tâche ne correspond aux filtres de recherche.</p>";
+        }
+    }
 }
