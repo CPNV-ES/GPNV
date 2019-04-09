@@ -57,7 +57,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('project/{id}/target', ['as' => 'project.storetarget', 'uses' => 'ProjectController@storeTarget'])->where('projectid', '[0-9]+');
         Route::post('target/{target}/valide', ['as' => 'project.validetarget', 'uses' => 'ProjectController@valideTarget'])->where('target', '[0-9]+');
         Route::get('project/{id}/target', ['as' => 'project.gettarget', 'uses' => 'ProjectController@getTarget'])->where('id', '[0-9]+');
-        Route::get('project/{id}/getTasks', ['as' => 'project.getTasks', 'uses' => 'ProjectController@getTasks' ])->where('id', '[0-9]+');
+        Route::get('project/{id}/getTasks', ['as' => 'project.task.getTasks', 'uses' => 'TaskController@getTasks' ])->where('id', '[0-9]+');
 
         Route::post('project/{id}/editDescription', 'ProjectController@editDescription')->where('id', '[0-9]+');
         #Route::post('project/{id}/quitProject/', ['as' => 'project.quitProject', 'uses' => 'ProjectController@quitProject'])->where('id', '[0-9]+');
