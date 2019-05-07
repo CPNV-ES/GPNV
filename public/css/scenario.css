@@ -22,3 +22,9 @@ div.table>.tableRow>.cell {
   max-height: 800px;
   overflow-y: auto;
 }
+
+.over-picture {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}

@@ -100,10 +100,10 @@
           </form>
         </div>
       </div>
-
-
+    </div>
+    <div class="row">
       <!--        IMAGES      -->
-      <div class="maquette col-xs-12 col-md-6">
+      <div class="maquette col-xs-12 col-md-6"> 
         <h2>Image</h2>
         <div ondrop="drop(event)" ondragover="allowDrop(event)">
           <a href="{{ URL::asset('mockups/thumbnail-default.jpg') }}" target="_blank">
@@ -117,6 +117,9 @@
           @foreach($mockups as $mockup)
             <div class="col-md-4 col-xs-12 col-lg-3" style="padding:2px;">
               <img src="{{ URL::asset('mockups/'.$projectId.'/'.$mockup->url)}}" id='{{$mockup->id}}' style="max-width:100%; max-height: 200px;" draggable="true" ondragstart="drag(event)">
+              <div onclick="delPicture({{$mockup->id}})" class="btn btn-danger pull-right over-picture">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </div>
             </div>
           @endforeach
         </div>
@@ -131,9 +134,6 @@
             </div>
             <div class="form-group">
               <button name="button" class="btn btn-warning">Ajouter une image</button>
-              <div ondrop="delPicture(event)" ondragover="allowDrop(event)" class="btn btn-danger pull-right">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              </div>
             </div>
           </form>
         </div>
