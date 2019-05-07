@@ -104,14 +104,14 @@
     <div class="row">
       <!--        IMAGES      -->
       <div class="maquette col-xs-12 col-md-6"> 
-        <h2>Image</h2>
+        <!--<h2>Image</h2>
         <div ondrop="drop(event)" ondragover="allowDrop(event)">
           <a href="{{ URL::asset('mockups/thumbnail-default.jpg') }}" target="_blank">
             <img src="{{ URL::asset('mockups/thumbnail-default.jpg') }}"/>
           </a>
         </div>
       </div>
-      <div class="col-xs-12 col-md-12">
+      <div class="col-xs-12 col-md-12">-->
         <h2>Images disponibles</h2>
         <div class="col-xs-12 maquettes">
           @foreach($mockups as $mockup)
