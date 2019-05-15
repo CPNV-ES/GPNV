@@ -91,7 +91,7 @@ function resetStepColor(element) {
 * Auto save the step on leave if modified
 */
 function updateStep(form, element) {
-  if (form.oldReponse.value != form.reponse.value || form.oldAction.value != form.action.value) {
+  if (form.oldReponse.value != form.reponse.value || form.oldAction.value != form.action.value || form.oldCondition.value != form.condition.value) {
     $.ajax({
       url: $(form).attr('action'),
       type: $(form).attr('method'),
@@ -99,6 +99,7 @@ function updateStep(form, element) {
       success: function () {
         form.oldReponse.value = form.reponse.value;
         form.oldAction.value = form.action.value;
+        form.oldCondition.value = form.condition.value;
         $(element).css('border-width', '2px');
         $(element).css('border-color', 'green');
       }
@@ -145,8 +146,10 @@ $(document).ready(function () {
 
     //Show edit field + button
     $('#stepAction1_' + id).addClass("hidden");
+    $('#stepCondition1_' + id).addClass("hidden");
     $('#stepResult1_' + id).addClass("hidden");
     $('#stepAction_' + id).removeClass("hidden");
+    $('#stepCondition_' + id).removeClass("hidden");
     $('#stepResult_' + id).removeClass("hidden");
     $('#' + btn).addClass("hidden");
     $('#delStep_' + id).removeClass("hidden");
@@ -158,24 +161,29 @@ $(document).ready(function () {
     var btn = $(this).attr('id');
     var id = btn.match(/_([^ ]*)/)[1];
     var newValueAction = $('#stepAction_' + id)["0"].value;
+    var newValueCondition = $('#stepCondition_' + id)["0"].value;
     var newValueResponse = $('#stepResult_' + id)["0"].value;
 
     console.log(newValueAction);
+    console.log(newValueCondition);
     console.log(newValueResponse);
     //Return to initial view
     $('#stepAction1_' + id).removeClass("hidden");
+    $('#stepCondition1_' + id).removeClass("hidden");
     $('#stepResult1_' + id).removeClass("hidden");
     $('#stepAction_' + id).addClass("hidden");
+    $('#stepCondition_' + id).addClass("hidden");
     $('#stepResult_' + id).addClass("hidden");
     $('#modifyStep_' + id).removeClass("hidden");
     $('#delStep_' + id).addClass("hidden");
     $('#delCellStep').addClass("hidden");
     $('#validateStep_' + id).addClass("hidden");
     $('#stepAction1_' + id).text(newValueAction);
+    $('#stepCondition1_' + id).text(newValueCondition);
     $('#stepResult1_' + id).text(newValueResponse);
 
 
-    var data0 = { action: newValueAction, response: newValueResponse };
+    var data0 = { action: newValueAction, response: newValueResponse, condition: newValueCondition };
     var request = JSON.stringify(data0);
 
     $.ajax({
