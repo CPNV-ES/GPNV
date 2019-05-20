@@ -164,9 +164,6 @@ $(document).ready(function () {
     var newValueCondition = $('#stepCondition_' + id)["0"].value;
     var newValueResponse = $('#stepResult_' + id)["0"].value;
 
-    console.log(newValueAction);
-    console.log(newValueCondition);
-    console.log(newValueResponse);
     //Return to initial view
     $('#stepAction1_' + id).removeClass("hidden");
     $('#stepCondition1_' + id).removeClass("hidden");
