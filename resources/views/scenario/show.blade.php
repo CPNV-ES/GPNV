@@ -116,7 +116,7 @@
       </div>
       <!--        IMAGES      -->
       <div class="maquette col-xs-12 col-md-6"> 
-          <h2>Image</h2>
+          <h2>Maquette</h2>
           <div ondrop="drop(event)" ondragover="allowDrop(event)">
             <a href="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}" target="_blank">
               <img src="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}"/>
