@@ -45,6 +45,7 @@
           <div class="tableRow">
             <div class="cell">#</div>
             <div class="cell">Action</div>
+            <div class="cell">Condition</div>
             <div class="cell">Réponse</div>
             <div class="cell">Modif</div>
             <div id="delCellStep" class="cell hidden">Delete</div>

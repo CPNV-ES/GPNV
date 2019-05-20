@@ -85,7 +85,7 @@ class ScenarioStepController extends Controller
      */
     public function update($projectId, $scenarioId, $itemId, Request $request) //Was Request $requete in last project
     {
-        DB::table('steps')->where('id', $itemId)->update(array('order'=>$request->order, 'action'=>$request->action, 'result'=>$request->reponse));
+        DB::table('steps')->where('id', $itemId)->update(array('order'=>$request->order, 'action'=>$request->action, 'condition'=>$request->condition, 'result'=>$request->reponse));
         return redirect()->back();
     }
 
