@@ -50,10 +50,12 @@
             <div class="cell">Modif</div>
             <div id="delCellStep" class="cell hidden">Delete</div>
           </div>
-            <?php $order=0;?>
           @foreach($scenario->steps as $step)
-                <?php $order++?>
-            <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+              @if (!$loop->index) 
+                <form id="formStep" method="post" class="tableRow active" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+              @else 
+                <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+              @endif
               {{ csrf_field() }}
               {{ method_field('POST') }}
               <input type="hidden" name="id" value="{{$step->id}}">
@@ -63,7 +65,7 @@
               <input type="hidden" name="oldAction" value="{{ $step->action }}">
               <input type="hidden" name="oldCondition" value="{{ $step->condition }}">
               <input type="hidden" name="oldReponse" value="{{ $step->result }}">
-              <div class="cell" name="order">{{ $order }}</div>
+              <div class="cell" name="order">{{ $loop->index + 1 }}</div>
 
               <!-- Action Step Cell -->
               <div class="cell">
@@ -100,7 +102,7 @@
           @endforeach
 
           <h2>Nouvelle etape</h2>
-          <form method="post" class="tableRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
+          <form method="post" class="tableCreateRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
 
             {{ csrf_field() }}
             {{ method_field('POST') }}
@@ -112,13 +114,19 @@
           </form>
         </div>
       </div>
-      <!--        IMAGES      -->
+      <!--        MAQUETTE      -->
       <div class="maquette col-xs-12 col-md-6"> 
-          <h2>Image</h2>
+          <h2>Maquette</h2>
           <div ondrop="drop(event)" ondragover="allowDrop(event)">
-            <a href="{{ URL::asset('mockups/thumbnail-default.jpg') }}" target="_blank">
-              <img src="{{ URL::asset('mockups/thumbnail-default.jpg') }}"/>
+          @if (isset($scenario->steps[0]->mockup))
+            <a href="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}" target="_blank">
+              <img src="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}"/>
             </a>
+          @else
+            <a href="{{ URL::asset("mockups/thumbnail-default.jpg") }}" target="_blank">
+              <img src="{{ URL::asset("mockups/thumbnail-default.jpg") }}"/>
+            </a>
+          @endif
           </div>
         </div>
         <div class="col-xs-12 col-md-12">
