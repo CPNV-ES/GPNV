@@ -102,7 +102,7 @@
           @endforeach
 
           <h2>Nouvelle etape</h2>
-          <form method="post" class="tableRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
+          <form method="post" class="tableCreateRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
 
             {{ csrf_field() }}
             {{ method_field('POST') }}
@@ -114,13 +114,19 @@
           </form>
         </div>
       </div>
-      <!--        IMAGES      -->
+      <!--        MAQUETTE      -->
       <div class="maquette col-xs-12 col-md-6"> 
           <h2>Maquette</h2>
           <div ondrop="drop(event)" ondragover="allowDrop(event)">
+          @if (isset($scenario->steps[0]->mockup))
             <a href="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}" target="_blank">
               <img src="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}"/>
             </a>
+          @else
+            <a href="{{ URL::asset("mockups/thumbnail-default.jpg") }}" target="_blank">
+              <img src="{{ URL::asset("mockups/thumbnail-default.jpg") }}"/>
+            </a>
+          @endif
           </div>
         </div>
         <div class="col-xs-12 col-md-12">
