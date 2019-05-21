@@ -4,7 +4,7 @@
   Modified By : Philippe Baumann
 -->
 
-<div class="col-md-12 well well-sm checklist-item">
+<div class="col-md-12 well well-sm checklist-item showObjectif" data-id="{{$checkListItem->id}}">
     @if(isset($modalBox))
         <a class="btn removeObjective pull-right icon-checklist" data-id="{{$checkListItem->id}}"
            data-projectid="{{$project->id}}">
@@ -13,7 +13,7 @@
     @endif
 
     @if(isset($modalBox) && $modalBox)
-        <a class="showObjectif" data-id="{{$checkListItem->id}}">
+        <a class="" data-id="{{$checkListItem->id}}">
     @else
         </a>
     @endif
@@ -32,11 +32,12 @@
         </label>
     @endif
 
-    <!-- Objective actions -->
+    <!-- Objective Edit Button -->
     <a class="btn pull-right icon-checklist updateObjective" data-id="{{$checkListItem->id}}">
         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
     </a>
 
+    <!-- Objective Hidden Edit -->
     <div id="{{$checkListItem->id}}" class="col-md-12 hidden">
         @include("objective.form")
     </div>
