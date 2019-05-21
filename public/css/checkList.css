@@ -65,6 +65,11 @@
 
 .checklist-item{
   max-height: 35px;
+  background-color: #ffffff;
+}
+
+.checklist-item:hover{
+  background-color: #f1f1f1;
 }
 
 .icon-checklist{

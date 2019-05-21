@@ -10,6 +10,7 @@ Homestead.json
 auth.json
 public/files/
 public/avatar/*
+public/mockups
 !public/avatar/default.png
 .remote-sync.json
 /bootstrap/cache/*

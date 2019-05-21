@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if(env("APP_DEBUG", false)) Auth::loginUsingId(env("DEBUG_USER", 1), true);
         /*;
         View::composer('layouts/app', function($view){
             $invitations = Invitation::where("status","=","wait")->get();

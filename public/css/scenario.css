@@ -7,10 +7,16 @@ div.table {
 div.table>.tableRow {
   display: table-row;
 }
+div.table>.tableCreateRow {
+  display: table-row;
+}
 div.table>form.tableRow:hover,  div.table>form.tableRow.active {
   background-color: #ddd;
 }
 div.table>.tableRow>.cell {
+  display: table-cell; vertical-align: middle; padding: 5px;
+}
+div.table>.tableCreateRow>.cell {
   display: table-cell; vertical-align: middle; padding: 5px;
 }
 
@@ -21,4 +27,10 @@ div.table>.tableRow>.cell {
 .maquettes{
   max-height: 800px;
   overflow-y: auto;
+}
+
+.over-picture {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
