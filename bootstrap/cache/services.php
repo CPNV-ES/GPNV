@@ -24,14 +24,16 @@
     20 => 'Illuminate\\View\\ViewServiceProvider',
     21 => 'Aacotroneo\\Saml2\\Saml2ServiceProvider',
     22 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    23 => 'Collective\\Html\\HtmlServiceProvider',
+    23 => 'Laravel\\Tinker\\TinkerServiceProvider',
     24 => 'Collective\\Html\\HtmlServiceProvider',
-    25 => 'App\\Providers\\AppServiceProvider',
-    26 => 'App\\Providers\\AuthServiceProvider',
-    27 => 'App\\Providers\\EventServiceProvider',
-    28 => 'App\\Providers\\RouteServiceProvider',
-    29 => 'Mortimer\\Rootrelativeurls\\RootrelativeurlsServiceProvider',
-    30 => 'Mortimer\\HeaderTokenGuard\\ServiceProvider',
+    25 => 'Carbon\\Laravel\\ServiceProvider',
+    26 => 'Collective\\Html\\HtmlServiceProvider',
+    27 => 'App\\Providers\\AppServiceProvider',
+    28 => 'App\\Providers\\AuthServiceProvider',
+    29 => 'App\\Providers\\EventServiceProvider',
+    30 => 'App\\Providers\\RouteServiceProvider',
+    31 => 'Mortimer\\Rootrelativeurls\\RootrelativeurlsServiceProvider',
+    32 => 'Mortimer\\HeaderTokenGuard\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -46,12 +48,13 @@
     8 => 'Illuminate\\View\\ViewServiceProvider',
     9 => 'Aacotroneo\\Saml2\\Saml2ServiceProvider',
     10 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    11 => 'App\\Providers\\AppServiceProvider',
-    12 => 'App\\Providers\\AuthServiceProvider',
-    13 => 'App\\Providers\\EventServiceProvider',
-    14 => 'App\\Providers\\RouteServiceProvider',
-    15 => 'Mortimer\\Rootrelativeurls\\RootrelativeurlsServiceProvider',
-    16 => 'Mortimer\\HeaderTokenGuard\\ServiceProvider',
+    11 => 'Carbon\\Laravel\\ServiceProvider',
+    12 => 'App\\Providers\\AppServiceProvider',
+    13 => 'App\\Providers\\AuthServiceProvider',
+    14 => 'App\\Providers\\EventServiceProvider',
+    15 => 'App\\Providers\\RouteServiceProvider',
+    16 => 'Mortimer\\Rootrelativeurls\\RootrelativeurlsServiceProvider',
+    17 => 'Mortimer\\HeaderTokenGuard\\ServiceProvider',
   ),
   'deferred' => 
   array (
@@ -151,6 +154,7 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
@@ -192,6 +196,9 @@
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
     'Collective\\Html\\HtmlServiceProvider' => 
