@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -13,7 +16,9 @@
         "laravelcollective/html": "5.5",
         "mortimer/rootrelativeurls": "dev-master",
         "mortimer/header-token-guard": "dev-master",
-        "aacotroneo/laravel-saml2": "dev-remove_mcrypt"
+        "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
+        "laravel/tinker": "^1.0",
+        "vlucas/phpdotenv": "~2.2"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -30,10 +35,10 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "psr-0":{
+        "psr-0": {
             "Lavary\\Menu\\": "src/"
         },
-        "files":[
+        "files": [
             "app/helpers.php"
         ]
     },

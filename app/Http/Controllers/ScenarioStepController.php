@@ -28,13 +28,14 @@ class ScenarioStepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($projectId, $scenarioId, Request $requete)
+    public function create($projectId, $scenarioId, Request $request)
     {
         $order = ScenarioStep::where('scenario_id', $scenarioId)->max('order') + 1;
 
         $step = new ScenarioStep;
-        $step->action = $requete->action;
-        $step->result = $requete->reponse;
+        $step->action = $request->action;
+        $step->condition = $request->condition;
+        $step->result = $request->reponse;
         $step->order = $order;
         $step->scenario_id = $scenarioId;
 
@@ -83,9 +84,9 @@ class ScenarioStepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($projectId, $scenarioId, $itemId, Request $request) //Was Request $requete in last project
+    public function update($projectId, $scenarioId, $itemId, Request $request) //Was Request $request in last project
     {
-        DB::table('steps')->where('id', $itemId)->update(array('order'=>$request->order, 'action'=>$request->action, 'result'=>$request->reponse));
+        DB::table('steps')->where('id', $itemId)->update(array('order'=>$request->order, 'action'=>$request->action, 'condition'=>$request->condition, 'result'=>$request->reponse));
         return redirect()->back();
     }
 

@@ -162,83 +162,6 @@ class ProjectController extends Controller
     }
 
     /**
-    * Returns the html representation of all views mathing a set of filter
-    * specified in the request parameter
-    * @param $request Define the request data send by POST
-    * @return tasks
-    */
-    public function getTasks(Request $request) {
-        $projectId = $request->id;
-        $status = $request->status;
-        $taskOwner = $request->taskOwner;
-        $taskObjective = $request->taskObjective;
-
-        // Stores the task views representations that will be displayed to the user
-        $viewStack = "";
-
-        // Holds tasks matching the search criterias/filters
-        $tasks = collect(new Task);
-
-        switch ($taskOwner) {
-            case 'all':
-                $query = Task::join('users_tasks', 'tasks.id', '=', 'users_tasks.task_id')
-                    ->select('tasks.*')
-                    ->where("tasks.project_id", "=", $projectId)
-                    ->when(count($status) > 0, function ($query) use ($status) {
-                        return $query->whereIn("tasks.status_id", $status);
-                    })
-                    ->distinct()
-                    ->whereNull('tasks.parent_id');
-                if(isset($taskObjective) && $taskObjective!='all')
-                  $query->where('tasks.Objective_id','=', $taskObjective);
-                $tasks = $query->get();
-                break;
-
-            case 'nobody':
-                $query = Task::doesntHave('usersTasks')
-                    ->where("tasks.project_id", "=", $projectId)
-                    ->when(count($status) > 0, function ($query) use ($status) {
-                        return $query->whereIn("tasks.status_id", $status);
-                    })
-                    ->whereNull('tasks.parent_id');
-
-                if(isset($taskObjective) && $taskObjective!='all')
-                  $query->where('tasks.Objective_id','=', $taskObjective);
-
-                $tasks = $query->get();
-                break;
-
-            default:
-                $query = Task::join('users_tasks', 'tasks.id', '=', 'users_tasks.task_id')
-                    ->select('tasks.*')
-                    ->where('users_tasks.user_id', "=", $taskOwner)
-                    ->where("tasks.project_id", "=", $projectId)
-                    ->when(count($status) > 0, function ($query) use ($status) {
-                        return $query->whereIn("tasks.status_id", $status);
-                    })
-                    ->whereNull('tasks.parent_id');
-
-                if(isset($taskObjective) && $taskObjective!='all')
-                  $query->where('tasks.Objective_id','=', $taskObjective);
-
-                $tasks = $query->get();
-                break;
-        }
-
-        // Making sure there are tasks to display / show a message otherwise
-
-        if (count($tasks) > 0) {
-            foreach ($tasks as $task) {
-                $taskView = view('project/task', ['task' => $task]);
-                $viewStack .= $taskView;
-            }
-            return $viewStack;
-        } else {
-            return "<p id=\"resultLess\">Aucune tâche ne correspond aux filtres de recherche.</p>";
-        }
-    }
-
-    /**
     * Return the view to creating projects
     * @return view of project creation
     */
@@ -284,15 +207,6 @@ class ProjectController extends Controller
         return redirect()->route('project.index');
     }
 
-    /**
-    * Return te view to creating tasks
-    * @param $id The project id
-    * @return view of task creation
-    */
-    public function createTask($id){
-        $taskTypes = DB::table('taskTypes')->get();
-        return view('task.create', ['project' => $id, 'taskTypes' => $taskTypes]);
-    }
 
     /**
     * Edit a task

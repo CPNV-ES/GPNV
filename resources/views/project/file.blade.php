@@ -10,7 +10,7 @@
                   <div class="panel-heading">Ajoutez des fichiers</div>
                   <div class="panel-body">
                       <div class="container">
-                      <form enctype="multipart/form-data" action="{{route('files.store', $project->id)}}" method="post" id="sendFile">
+                      <form enctype="multipart/form-data" action="{{route('project.files.store', $project->id)}}" method="post" id="sendFile">
                           {!! csrf_field() !!}
 
                           <label class="col-md-4 control-label">Description du fichier</label>

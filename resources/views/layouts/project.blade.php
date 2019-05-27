@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+`
     <div class="projectContainer">
 
         <div class="row">
@@ -18,13 +18,14 @@
                     <a href="{{route('objective.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'objective.show') ? 'active' : '' }}">
                         <h3><i class="fa fa-crosshairs"></i><br>Objectifs</h3>
                     </a>
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == '') ? 'active' : '' }}">
+                    <a href="{{route('project.tasks.index',['project' => $project->id]) }}" class="list-group-item {{ (\Request::route()->getName() == 'project.tasks.index') ? 'active' : '' }}">
                         <h3><i class="fa fa-list-ul"></i><br>Tâches</h3>
                     </a>
-                    <a href="#" class="list-group-item {{ (\Request::route()->getName() == '') ? 'active' : '' }}">
+                    <a href="{{route('project.events.index', ['project' => $project])}}" class="list-group-item {{ (\Request::route()->getName() == 'project.events.index') ? 'active' : '' }}">
+
                         <h3><i class="fa fa-book"></i><br>Journal de bord</h3>
                     </a>
-                    <a href="{{route('files.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'files.show') ? 'active' : '' }}">
+                    <a href="{{route('project.files.index', compact('project'))}}" class="list-group-item {{ (\Illuminate\Support\Str::startsWith(\Request::route()->getName(),'project.files')) ? 'active' : '' }}">
                         <h3><i class="fa fa-copy"></i><br>Fichiers</h3>
                     </a>
                     <a href="{{route('deliverable.show', ['id' => $project->id])}}" class="list-group-item {{ (\Request::route()->getName() == 'deliverable.show') ? 'active' : '' }}">

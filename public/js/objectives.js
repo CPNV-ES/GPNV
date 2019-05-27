@@ -26,6 +26,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", 'a.removeObjective', function (event) {
+        event.stopImmediatePropagation()
         var id = this.getAttribute('data-id');
         var projectid = this.getAttribute('data-projectid');
 
@@ -54,11 +55,13 @@ $(document).ready(function () {
     //Show dialog to create a new scenario for objective and show actuals
     $(document).on("click", '.showObjectif', function (event) {
         objectiveID = this.getAttribute('data-id');
-        $.get("objective/" + objectiveID, function (form) {
-            bootbox.dialog({
-                message: form
+        if ($('.updateObjective').closest('.checklist-item').css('max-height') !== ('350px')){
+            $.get("objective/" + objectiveID, function (form) {
+                bootbox.dialog({
+                    message: form
+                });
             });
-        });
+        }
     });
 
 
@@ -74,13 +77,24 @@ $(document).ready(function () {
     });
 
     $(document).ajaxComplete(function () {
-        // Show the form to link a file or url to a deliverable
-        $('.updateObjective').click(function () {
-            //$('a.linkDelivery').click(function () {
-            $(this).closest('.checklist-item').css('max-height', '350px')
-            $('#' + objectiveID).addClass("hidden")
-            objectiveID = this.getAttribute('data-id');
-            $('#' + objectiveID).removeClass("hidden")
+        var closed = false;
+        // Show the form to link a file or url to a deliverable <<<<<<< $(this).closest('.checklist-item').css('max-height') == ('350px') >>>>>>>
+        $('.updateObjective').click(function (event) {
+            event.stopImmediatePropagation();
+            if (closed) {
+                $(this).closest('.checklist-item').css('max-height', '36px');
+                objectiveID = this.getAttribute('data-id');
+                $('#' + objectiveID).addClass("hidden");
+                closed = false;
+            }
+            else {
+                //$('a.linkDelivery').click(function () {
+                console.log('bob')
+                $(this).closest('.checklist-item').css('max-height', '350px');
+                objectiveID = this.getAttribute('data-id');
+                $('#' + objectiveID).removeClass("hidden")
+                closed = true;
+            }
         });
     })
 })

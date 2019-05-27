@@ -4,8 +4,8 @@
   <div class="scenario">
     <div class="row">
       <div class="col-xs-12">
-        <a href="{{route('project.show', $projectId)}}" class="btn btn-primary btn-retour">
-          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour au projet
+        <a href="{{route('objective.show', $projectId)}}" class="btn btn-primary btn-retour">
+          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour au objectifs
         </a>
       </div>
     </div>
@@ -27,8 +27,8 @@
           <p id="projectDescriptionP">{{ $scenario->description }}</p>
         </div>
         <div class="form-group">
-          <input id="slideValidated" disabled @if($scenario->actif == 1) checked @endif name="actif" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Validé" data-off="Non Validé">
-          <input id="slideTested" disabled @if($scenario->test_validated == 1) checked @endif name="test_validated" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Testé et Validé" data-off="Pas testé">
+          <input id="slideValidated"  @if($scenario->actif == 1) checked @endif name="actif" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Validé" data-off="Non Validé">
+          <input id="slideTested"  @if($scenario->test_validated == 1) checked @endif name="test_validated" type="checkbox" data-toggle="toggle" data-onstyle="success" data-on="Testé et Validé" data-off="Pas testé">
           <button id="saveDescription" class="btn btn-success pull-right hidden" onclick="saveDescription">Enregistrer</button>
           <button id="modifyDescription" class="btn btn-warning pull-right" type="button">Modifier</button>
           <button id="cancelDescription" class="btn btn-danger pull-right hidden" type="button" onclick="cancelDescription">Annuler</button>
@@ -45,14 +45,17 @@
           <div class="tableRow">
             <div class="cell">#</div>
             <div class="cell">Action</div>
+            <div class="cell">Condition</div>
             <div class="cell">Réponse</div>
             <div class="cell">Modif</div>
             <div id="delCellStep" class="cell hidden">Delete</div>
           </div>
-            <?php $order=0;?>
           @foreach($scenario->steps as $step)
-                <?php $order++?>
-            <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+              @if (!$loop->index) 
+                <form id="formStep" method="post" class="tableRow active" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+              @else 
+                <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
+              @endif
               {{ csrf_field() }}
               {{ method_field('POST') }}
               <input type="hidden" name="id" value="{{$step->id}}">
@@ -60,13 +63,23 @@
               <input type="hidden" name="mockup" value="@if(isset($step->mockup)) {{$step->mockup->id}} @endif">
               <input type="hidden" name="mockupUrl" value="@if(isset($step->mockup)) {{ URL::asset('mockups/'.$projectId.'/'.$step->mockup->url)}} @endif">
               <input type="hidden" name="oldAction" value="{{ $step->action }}">
+              <input type="hidden" name="oldCondition" value="{{ $step->condition }}">
               <input type="hidden" name="oldReponse" value="{{ $step->result }}">
-              <div class="cell" name="order">{{ $order }}</div>
+              <div class="cell" name="order">{{ $loop->index + 1 }}</div>
 
+              <!-- Action Step Cell -->
               <div class="cell">
                 <textarea id ="stepAction_{{$step->id}}" onclick="resetStepColor(this)" onblur="updateStep(this.form, this)" name="action" class="form-control hidden">{{ $step->action }}</textarea>
                 <p id ="stepAction1_{{$step->id}}"> {{ $step->action }}</p>
               </div>
+              
+              <!-- Condition Step Cell -->
+              <div class="cell">
+                <p id ="stepCondition1_{{$step->id}}"> {{ $step->condition }}</p>
+                <textarea id ="stepCondition_{{$step->id}}" onclick="resetStepColor(this)" onblur="updateStep(this.form, this)" name="condition" class="form-control hidden">{{ $step->condition }}</textarea>
+              </div>
+
+              <!-- Response Step Cell -->
               <div class="cell">
                 <p id ="stepResult1_{{$step->id}}"> {{ $step->result }}</p>
                 <textarea id ="stepResult_{{$step->id}}" onclick="resetStepColor(this)" onblur="updateStep(this.form, this)" name="reponse" class="form-control hidden">{{ $step->result }}</textarea>
@@ -89,55 +102,60 @@
           @endforeach
 
           <h2>Nouvelle etape</h2>
-          <form method="post" class="tableRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
+          <form method="post" class="tableCreateRow" action="{{route('scenario_steps.create', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}">
 
             {{ csrf_field() }}
             {{ method_field('POST') }}
             <div class="cell"></div>
             <div class="cell"><textarea id="action" name="action" class="form-control"></textarea></div>
+            <div class="cell"><textarea id="condition" name="condition" class="form-control"></textarea></div>
             <div class="cell"><textarea id="reponse" name="reponse" class="form-control"></textarea></div>
             <div class="cell"><button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></div>
           </form>
         </div>
       </div>
-
-
-      <!--        IMAGES      -->
-      <div class="maquette col-xs-12 col-md-6">
-        <h2>Image</h2>
-        <div ondrop="drop(event)" ondragover="allowDrop(event)">
-          <a href="{{ URL::asset('mockups/thumbnail-default.jpg') }}" target="_blank">
-            <img src="{{ URL::asset('mockups/thumbnail-default.jpg') }}"/>
-          </a>
+      <!--        MAQUETTE      -->
+      <div class="maquette col-xs-12 col-md-6"> 
+          <h2>Maquette</h2>
+          <div ondrop="drop(event)" ondragover="allowDrop(event)">
+          @if (isset($scenario->steps[0]->mockup))
+            <a href="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}" target="_blank">
+              <img src="{{ URL::asset("mockups/{$project->id}/{$scenario->steps[0]->mockup->url}") }}"/>
+            </a>
+          @else
+            <a href="{{ URL::asset("mockups/thumbnail-default.jpg") }}" target="_blank">
+              <img src="{{ URL::asset("mockups/thumbnail-default.jpg") }}"/>
+            </a>
+          @endif
+          </div>
         </div>
-      </div>
-      <div class="col-xs-12 col-md-12">
-        <h2>Images disponibles</h2>
-        <div class="col-xs-12 maquettes">
-          @foreach($mockups as $mockup)
-            <div class="col-md-4 col-xs-12 col-lg-3" style="padding:2px;">
-              <img src="{{ URL::asset('mockups/'.$projectId.'/'.$mockup->url)}}" id='{{$mockup->id}}' style="max-width:100%; max-height: 200px;" draggable="true" ondragstart="drag(event)">
-            </div>
-          @endforeach
-        </div>
-
-        <div class="col-xs-12">
-          <h4>Ajouter une Image</h4>
-          <form id="uploadMockup" enctype="multipart/form-data" action="{{route('scenario.uploadMaquete', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('POST') }}
-            <div class="form-group">
-              <input type="file" name="maquette" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <button name="button" class="btn btn-warning">Ajouter une image</button>
-              <div ondrop="delPicture(event)" ondragover="allowDrop(event)" class="btn btn-danger pull-right">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        <div class="col-xs-12 col-md-12">
+          <h2>Images disponibles</h2>
+          <div class="col-xs-12 maquettes">
+            @foreach($mockups as $mockup)
+              <div class="col-md-4 col-xs-12 col-lg-3" style="padding:2px;">
+                <img src="{{ URL::asset('mockups/'.$projectId.'/'.$mockup->url)}}" id='{{$mockup->id}}' style="max-width:100%; max-height: 200px;" draggable="true" ondragstart="drag(event)">
+                <div onclick="delPicture({{$mockup->id}})" class="btn btn-danger pull-right over-picture">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                  </div>
               </div>
-            </div>
-          </form>
+            @endforeach
+          </div>
+  
+          <div class="col-xs-12">
+            <h4>Ajouter une Image</h4>
+            <form id="uploadMockup" enctype="multipart/form-data" action="{{route('scenario.uploadMaquete', array('projectId'=>$projectId, 'scenarioId'=>$scenario->id))}}" method="post">
+              {{ csrf_field() }}
+              {{ method_field('POST') }}
+              <div class="form-group">
+                <input type="file" name="maquette" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <button name="button" class="btn btn-warning">Ajouter une image</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
     </div>
   </div>
   <script>

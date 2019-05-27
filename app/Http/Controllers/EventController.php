@@ -19,27 +19,28 @@ use DB;
 class EventController extends Controller
 {
     /**
-    * Display all project events
+    * Display all project event
     * @param $project The project item
     * @param $request Define the request data send by POST
-    * @return json events
+    * @return json event
     */
-    public function show(Project $project, Request $request){
-        $currentUserId = Auth::id();
+    public function index(Project $project){
+        $events = Event::where('project_id', $project->id)->get();
 
-        $eventInfos = DB::table('events')
+        $currentUserId = Auth::id();
+       $eventInfos = DB::table('events')
             ->join('projects', 'projects.id', '=', 'events.project_id')
             ->join('users', 'events.user_id', '=', 'users.id')
             ->select('events.id as eventId', 'users.id as userId', 'users.firstname', 'users.lastname', 'events.description', 'events.created_at')
-            ->where('events.project_id', '=', $request->id)
+            ->where('events.project_id', '=', $project->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $projectMembers = Project::find($request->id)->users->sortBy('id');
+        $projectMembers = Project::find($project->id)->users->sortBy('id');
 
         $badgeCount = 0;
 
-        // Array containing lists of users that have validated events
+        // Array containing lists of users that have validated event
         $validations = array();
 
         foreach ($eventInfos as $eventKey => $event) {
@@ -64,13 +65,24 @@ class EventController extends Controller
             }
         }
 
-        return json_encode(array(
+        $data = json_encode(array(
             'eventInfos'=>$eventInfos,
             'currentUser'=>['id'=>$currentUserId],
             'validations' => $validations,
             'members' => $projectMembers,
             'badgeCount' => $badgeCount
         ));
+
+        return view('event.index',
+                ['project' => $project,
+                'data' => $data,
+                'members' => $projectMembers,
+                'currentUser'=>['id'=>$currentUserId],
+                'eventInfos'=>$eventInfos,
+                'validations' => $validations,
+                'badgeCount' => $badgeCount,
+                'events' => $events]);
+
     }
 
     /**
@@ -122,6 +134,10 @@ class EventController extends Controller
     * @return view event form
     */
     public function formEvent($id){
-        return view('events.store', ['id' => $id]);
+        return view('event.store', ['id' => $id]);
+    }
+    public function create(Project $project)
+    {
+        return view('event.create',[ 'project' => $project]);
     }
 }
