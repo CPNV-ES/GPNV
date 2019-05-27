@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use View;
+use Dotenv\Dotenv;
+use Illuminate\Foundation\Bootstrap\LoadConfiguration;
 use App\Models\User;
 use App\Models\Invitation;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(env("APP_DEBUG", false)) Auth::loginUsingId(env("DEBUG_USER", 1), true);
+        with(new Dotenv(app()->environmentPath(), app()->environmentFile()))->overload();
+        with(new LoadConfiguration())->bootstrap(app());
+
+        if(env("APP_DEBUG", false)) Auth::loginUsingId(env('DEBUG_USER'), true);
+
         /*;
         View::composer('layouts/app', function($view){
             $invitations = Invitation::where("status","=","wait")->get();
