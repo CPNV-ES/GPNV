@@ -27,6 +27,38 @@ class TaskController extends Controller
      * @return view to see whole project
      */
 
+    function show($projectID){
+        $project = Project::find($projectID);
+        $currentUser = Auth::user();
+        $projectMembers = $project->users->sortBy('id');
+        $objectifs = new CheckList('Project', $project->id, 'Objectifs', 'project/scenario');
+        $badgeCount = 0;
+        $events = Event::where('project_id', '=', $project->id)->orderBy('created_at', 'desc')->get();
+        $validations = array();
+        foreach ($events as $event) {
+            // Holds ids of users that have validated the event
+            $users = array();
+            foreach ($projectMembers as $member) {
+                $exists = AcknowledgedEvent::where([
+                    ['user_id', '=', $member->id],
+                    ['event_id', '=', $event->id],
+                ])->exists();
+
+                if($exists) {
+                    $users[] = $member->id;
+                }
+            }
+
+            $validations[$event->id] = $users;
+
+            // Incrementing badgeCount unless the current user validated the event
+            if (!in_array($currentUser->id, $users)) {
+                $badgeCount++;
+            }
+        }
+        return view('task.show', ['project' => $project, 'currentUser' => $currentUser, 'members' => $projectMembers, 'objectifs' => $objectifs, 'badgeCount' => $badgeCount, 'events' => $events , 'validations' => $validations]);
+    }
+
     function index($projectID)
     {
         $project = Project::find($projectID);

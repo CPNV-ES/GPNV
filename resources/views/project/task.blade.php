@@ -1,12 +1,12 @@
-<li class="taskContainer">
+<li class="taskContainer" >
     @if ($task->status->id == "1") <!-- id #1 = En cours -->
-      <a class="bg-info">
+        <a href="{{ "/project/" . $task->project->id . "/tasks/" . $task->id}}" class="bg-info" >
         <span class="taskStatus glyphicon glyphicon-time"></span>
     @elseif ($task->status->id == "2")  <!-- id #2 = A faire -->
-        <a class="bg-warning">
+        <a href="{{ "/project/" . $task->project->id . "/tasks/" . $task->id}}" class="bg-warning" >
         <span class="taskStatus glyphicon glyphicon-pushpin"></span>
     @else  <!-- id #3 = Terminée -->
-        <a class="bg-success">
+        <a href="{{ "/project/" . $task->project->id . "/tasks/" . $task->id}}" class="bg-success">
         <span class="taskStatus glyphicon glyphicon-ok"></span>
     @endif
     <span class="taskshow" data-id="{{$task->id}}">
@@ -19,8 +19,8 @@
       </p>
     </span>
     @if($task->children->isEmpty())
-      <button class="right btn taskuser" data-id="{{$task->id}}"> <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span> </button>
-      <button class="right btn taskdestroy"  data-id="{{$task->id}}"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
+        <button class="right btn taskuser" data-id="{{$task->id}}"> <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span> </button>
+        <button class="right btn taskdestroy"  data-id="{{$task->id}}"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
     @endif
     <button class="right btn taskedit" data-id="{{$task->id}}"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button>
     <button class="right btn taskplus" data-id="{{$task->id}}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
