@@ -148,7 +148,7 @@
               {{ csrf_field() }}
               {{ method_field('POST') }}
               <div class="form-group">
-                <input type="file" name="maquette" class="form-control" required>
+                <input type="file" name="maquette" class="form-control" required multiple>
               </div>
               <div class="form-group">
                 <button name="button" class="btn btn-warning">Ajouter une image</button>
