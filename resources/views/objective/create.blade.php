@@ -4,7 +4,7 @@ Description: Form to add a new checkList
 Requirement: Link objective js
 -->
 <div class="form-new-objective">
-    <form class="form-horizontal" role="form" id="form-objective" action="{{ URL('project') }}/{{$project->id}}/checklist/{{$objectifs->getId()}}/create">
+    <form class="form-horizontal" method="post" role="form" id="form-objective" action="{{ URL('project') }}/{{$project->id}}/checklist/{{$objectifs->getId()}}/create">
         <div class="col-md-6">
             {{ csrf_field() }}
             <input type="text" name="name" id="name" class="form-control" required>
