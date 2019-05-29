@@ -12,12 +12,9 @@
                     <div class="container">
                         @foreach($scenarios as $scenario)
                             <div class="row">
-                                <div class="col-xs-10">
-                                    <label>{{$scenario->name}}</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <a href="{{route('scenario.show', array('projectId'=>$projectId, 'stepId'=>$scenario->id))}}" class="btn btn-primary pull-rigth"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                </div>
+                                <a class="col-xs-11 checklist-item well well-sm" href="{{route('scenario.show', array('projectId'=>$projectId, 'stepId'=>$scenario->id))}}">
+                                    <label class="objective-title">{{$scenario->name}}</label>
+                                </a>
                                 <div class="col-xs-1">
                                     <a href="{{route('scenario.delete', array('projectId'=>$projectId, 'stepId'=>$scenario->id))}}" class="btn btn-danger pull-rigth"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                                 </div>
