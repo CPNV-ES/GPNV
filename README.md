@@ -75,6 +75,8 @@ Web developers :
  - BAZZARI Raphaël
  - MARCOUP Thomas
  - SILVA-MARQUES Fabio-Manuel
+ - Quentin Neves
+ - Philippe Baumann
 
 Client :
  - CARREL Xavier
