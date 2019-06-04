@@ -27,8 +27,9 @@ class TaskController extends Controller
      * @return view to see whole project
      */
 
-    function show($projectID){
+    function show($projectID, Request $request){
         $project = Project::find($projectID);
+        $currentTask = Task::find($request->task);
         $currentUser = Auth::user();
         $projectMembers = $project->users->sortBy('id');
         $objectifs = new CheckList('Project', $project->id, 'Objectifs', 'project/scenario');
@@ -56,7 +57,8 @@ class TaskController extends Controller
                 $badgeCount++;
             }
         }
-        return view('task.show', ['project' => $project, 'currentUser' => $currentUser, 'members' => $projectMembers, 'objectifs' => $objectifs, 'badgeCount' => $badgeCount, 'events' => $events , 'validations' => $validations]);
+        //return view('task.show', ['project' => $project, 'currentUser' => $currentUser, 'members' => $projectMembers, 'objectifs' => $objectifs, 'badgeCount' => $badgeCount, 'events' => $events , 'validations' => $validations, 'task' => $task]);
+        return view('task.show')->with(compact('project', 'currentUser', 'projectMembers', 'objectifs', 'badgeCount', 'events', 'validations', 'currentTask'));
     }
 
     function index($projectID)
