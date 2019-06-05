@@ -57,7 +57,6 @@ class TaskController extends Controller
                 $badgeCount++;
             }
         }
-        //return view('task.show', ['project' => $project, 'currentUser' => $currentUser, 'members' => $projectMembers, 'objectifs' => $objectifs, 'badgeCount' => $badgeCount, 'events' => $events , 'validations' => $validations, 'task' => $task]);
         return view('task.show')->with(compact('project', 'currentUser', 'projectMembers', 'objectifs', 'badgeCount', 'events', 'validations', 'currentTask'));
     }
 
