@@ -102,19 +102,21 @@ class ScenarioController extends Controller
   * @return to previous page
   */
   public function uploadMaquete($projectid, $scenarioId, Request $request){
-    if($request->hasFile('maquette')){
-      if($request->file('maquette')->isValid()){
-        $file = $request->file('maquette');
-        $newName = uniqid('img').".".$file->getClientOriginalExtension();
-        $path = $file->move("mockups/$projectid/", $newName);
+    if($request->hasFile('maquettes')){
+      $files = $request->file("maquettes");
 
-        $project = Project::find($projectid);
-
-        $mockup = new Mockup;
-        $mockup->url = $newName;
-        $mockup->project()->associate($project);
-        $mockup->save();
-
+      foreach($files as $file){
+        if($file->isValid()){
+          $newName = uniqid('img').".".$file->getClientOriginalExtension();
+          $path = $file->move("mockups/$projectid/", $newName);
+  
+          $project = Project::find($projectid);
+  
+          $mockup = new Mockup;
+          $mockup->url = $newName;
+          $mockup->project()->associate($project);
+          $mockup->save();
+        }
       }
     }
     return redirect()->back();

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Invitation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,13 +23,7 @@ class AppServiceProvider extends ServiceProvider
         with(new Dotenv(app()->environmentPath(), app()->environmentFile()))->overload();
         with(new LoadConfiguration())->bootstrap(app());
 
-        if(env("APP_DEBUG", false)) Auth::loginUsingId(env('DEBUG_USER'), true);
-
-        /*;
-        View::composer('layouts/app', function($view){
-            $invitations = Invitation::where("status","=","wait")->get();
-            $view->with('invitations', $invitations);
-        });*/
+        if(Schema::hasTable('users')) if(env("APP_DEBUG", false)) Auth::loginUsingId(env('DEBUG_USER'), true);
     }
 
     /**
