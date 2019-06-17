@@ -25,12 +25,30 @@ div.table>.tableCreateRow>.cell {
   max-width: 400px
 }
 
-.maquettes {
-  max-height: 800px;
-}
-
 .over-picture {
   position: absolute;
   top: 5px;
   left: 5px;
+}
+
+.dropZone {
+  height: 100px;
+  align-items: center;
+}
+
+.file img{
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.file{
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.dynamic-layout{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

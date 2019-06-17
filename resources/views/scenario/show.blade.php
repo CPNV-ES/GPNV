@@ -131,9 +131,9 @@
         </div>
         <div class="col-xs-12 col-md-12">
           <h2>Images disponibles</h2>
-          <div class="col-xs-12 maquettes">
+          <div class="col-xs-12 dynamic-layout">
             @foreach($mockups as $mockup)
-              <div class="col-md-4 col-xs-12 col-lg-3" style="padding:2px;">
+              <div class="col-md-4 col-xs-12 col-lg-3 file" style="padding:2px;">
                 <img src="{{ URL::asset('mockups/'.$projectId.'/'.$mockup->url)}}" id='{{$mockup->id}}' style="max-width:100%; max-height: 200px;" draggable="true" ondragstart="drag(event)">
                 <div onclick="delPicture({{$mockup->id}})" class="btn btn-danger pull-right over-picture">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -148,7 +148,7 @@
               {{ csrf_field() }}
               {{ method_field('POST') }}
               <div class="form-group">
-                <input type="file" name="maquettes[]" class="form-control" required multiple>
+                <input type="file" name="maquettes[]" class="form-control dropZone" required multiple>
               </div>
               <div class="form-group">
                 <button name="button" class="btn btn-warning">Ajouter une image</button>
