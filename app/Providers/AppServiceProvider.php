@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // refresh environnement variables 
         with(new Dotenv(app()->environmentPath(), app()->environmentFile()))->overload();
-        with(new LoadConfiguration())->bootstrap(app());
-
+        // Auto login as debug user only if migration have been done and if app runs in debug mode
         if(Schema::hasTable('users')) if(env("APP_DEBUG", false)) Auth::loginUsingId(env('DEBUG_USER'), true);
     }
 

@@ -51,7 +51,7 @@
             <div id="delCellStep" class="cell hidden">Delete</div>
           </div>
           @foreach($scenario->steps as $step)
-              @if (!$loop->index) 
+              @if (!$loop->index) <!-- pre-select first step by default-->
                 <form id="formStep" method="post" class="tableRow active" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
               @else 
                 <form id="formStep" method="post" class="tableRow" action="{{route('scenario_steps.modify', array('projectId' => $projectId, 'scenarioId' => $scenario->id, 'itemId' => $step->id))}}">
