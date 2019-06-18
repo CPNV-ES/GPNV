@@ -48,7 +48,13 @@ On your side, if you use Homestead, you must redirect host port 80 to virtual po
 After that, you can login in GPNV with your intranet account.
 
 ### Local login
-If you want to use GPNV without SAML, in.env, you must define `USAGE=LOCAL`. The application will automatically log in with the first account in the database.
+To use **GPNV** without login via SAML, you simply need to add this line in **.env** file :
+
+```
+LOCAL_USER={id}
+```
+
+If you don't specify any id, it won't change default login behavior. You still need to logout manually if the setting is removed.
 
 ## Capistrano Deployment 
 > Note: make sure you have the credentials to access the different services, and the right credentials in the .env file (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD, HOST_URL)

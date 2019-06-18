@@ -22,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // refresh environnement variables 
         with(new Dotenv(app()->environmentPath(), app()->environmentFile()))->overload();
-        // Auto login as debug user only if migration have been done and app runs in debug mode
-        if(Schema::hasTable('users')) if(env("APP_DEBUG", false)) Auth::loginUsingId(env('LOCAL_USER'), true);
+        // Auto login as local user only if it has been set and users table exists
+        if(env('LOCAL_USER') && Schema::hasTable('users')) Auth::loginUsingId(env('LOCAL_USER'), true);
     }
 
     /**
