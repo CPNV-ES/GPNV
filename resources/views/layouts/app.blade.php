@@ -72,6 +72,7 @@
                 <li><a href="{{ route('saml_login') }}">Login</a></li>
             @else
                 <li><a href="{{route('user.show', Auth::user()->id)}}">{{Auth::user()->fullname}}</a></li>
+                <li><a href="{{ route('logout') }}">Déconnexion</a></li>
             @endif
         </ul>
       </div>
