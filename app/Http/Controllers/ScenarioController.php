@@ -87,7 +87,7 @@ class ScenarioController extends Controller
     (new EventController())->logEvent($projectId, "Suppression du scénario \"$scenario->name\"");
 
     $scenario->delete();
-    return redirect()->back();
+    return redirect()->route('objective.show', ['projectId'=>$projectId]);
   }
 
 

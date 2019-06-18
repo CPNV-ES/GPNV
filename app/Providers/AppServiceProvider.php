@@ -20,10 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // refresh environnement variables 
         with(new Dotenv(app()->environmentPath(), app()->environmentFile()))->overload();
-        with(new LoadConfiguration())->bootstrap(app());
-
-        if(Schema::hasTable('users')) if(env("APP_DEBUG", false)) Auth::loginUsingId(env('DEBUG_USER'), true);
+        // Auto login as local user only if it has been set and users table exists
+        if(env('LOCAL_USER') && Schema::hasTable('users')) Auth::loginUsingId(env('LOCAL_USER'), true);
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -127,12 +128,7 @@ class SessionController extends Controller
     }
 
     public function noLogin(){
-
-        if(env("USAGE", "SERVER") == "LOCAL") {
-            $user = User::first();
-            \Auth::login($user);
-            return redirect()->route('home');
-        }
+        if(Auth::user()) return redirect()->route("home");        
         return view('auth.nologin');
     }
 }

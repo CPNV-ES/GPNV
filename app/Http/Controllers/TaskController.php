@@ -213,6 +213,7 @@ class TaskController extends Controller
     * Use to update or store a task
     * @param $task The task object
     * @param $request Define the request data send by POST
+    * @param $project The project which the task belongs to
     */
     function store(Task $task, Request $request, Project $project){
         $transactionResult = $task->update([

@@ -23,6 +23,7 @@ Route::group(['middleware' => 'web'], function () {
     //Route::get('test', 'Welcome@Test');
     Route::get('saml2/error',['as' => 'saml_error','uses' => 'SAMLController@error']);
     Route::get('login',['as' => 'login','uses' => 'SessionController@nologin']);
+    Route::get('logout', ['as' => 'logout', 'uses' => 'SessionController@destroy']);
 
     Route::group(['middleware' => 'auth'], function(){
 
@@ -69,7 +70,7 @@ Route::group(['middleware' => 'web'], function () {
 
         /*----------------------Routes scenario-------------------------------*/
         Route::get('project/{id}/scenario/{scenarionId}', ['as' => 'scenario.show', 'uses' => 'ScenarioController@show']);
-        Route::get('project/{id}/deleteScenario/{scenarioId}',['as' => 'scenario.delete', 'uses' => 'ScenarioController@delete']);
+        Route::get('project/{id}/delete/{scenarioId}',['as' => 'scenario.delete', 'uses' => 'ScenarioController@delete']);
         Route::get('project/{id}/checkListItem/{itemId}/scenario/create','ScenarioController@addItem');
         Route::post('project/{id}/checkListItem/{itemId}/scenario/create','ScenarioController@store');
         Route::put('project/{id}/scenario/{scenarioId}',['as'=>'scenario.modify', 'uses' => 'ScenarioController@update']);

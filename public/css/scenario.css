@@ -1,36 +1,69 @@
-.modalScenario>.modal-dialog{
-  width:70%;
+.modalScenario > .modal-dialog {
+    width: 70%;
 }
+
 div.table {
-  display: table; border-collapse: collapse;
-}
-div.table>.tableRow {
-  display: table-row;
-}
-div.table>.tableCreateRow {
-  display: table-row;
-}
-div.table>form.tableRow:hover,  div.table>form.tableRow.active {
-  background-color: #ddd;
-}
-div.table>.tableRow>.cell {
-  display: table-cell; vertical-align: middle; padding: 5px;
-}
-div.table>.tableCreateRow>.cell {
-  display: table-cell; vertical-align: middle; padding: 5px;
+    display: table;
+    border-collapse: collapse;
 }
 
-.maquette img{
-  max-height: 400px;
-  max-width: 400px
+div.table > .tableRow {
+    display: table-row;
 }
 
-.maquettes {
-  max-height: 800px;
+div.table > .tableCreateRow {
+    display: table-row;
+}
+
+div.table > form.tableRow:hover, div.table > form.tableRow.active {
+    background-color: #ddd;
+}
+
+div.table > .tableRow > .cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+div.table > .tableCreateRow > .cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.maquette img {
+    max-height: 400px;
+    max-width: 400px
 }
 
 .over-picture {
-  position: absolute;
-  top: 5px;
-  left: 5px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.dropZone {
+    height: 100px;
+    align-items: center;
+}
+
+.file img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.file {
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.dynamic-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button-spacer {
+    margin-left: 8px;
 }
