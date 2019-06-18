@@ -12,6 +12,13 @@ class Scenario extends Model
   {
     return $this->hasMany('App\Models\ScenarioStep');
   }
+
+  /*
+  public function objective(){
+      return $this->belongsTo('App\Models\CheckList');
+  }
+  */
+
   public function delete(){
     $this->steps()->delete();
     parent::delete();

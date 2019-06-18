@@ -172,4 +172,7 @@ class CheckList extends Model
       return DB::table('files')->where('id',$link)->first();
     }
   }
+  public function scenario(){
+      return $this->hasMany('App\Models\Scenario');
+  }
 }
