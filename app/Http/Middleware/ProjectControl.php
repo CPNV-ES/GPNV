@@ -18,7 +18,7 @@ class ProjectControl extends Validator
      */
     public function handle($request, Closure $next)
     {
-      if (Auth::user()->projects()->find($request->id) || Auth::user()->role_id==2){
+      if (Auth::user()->projects()->find($request->project) || Auth::user()->role_id==2){
         if(($request->isMethod('post') || $request->isMethod('delete')) && Auth::user()->projects()->find($request->id))
           return $next($request);
         elseif ($request->isMethod('get'))
